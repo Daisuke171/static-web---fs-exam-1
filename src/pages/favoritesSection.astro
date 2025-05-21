@@ -1,0 +1,106 @@
+---
+import MainLayout from '../layout/MainLayout.astro';
+---
+
+<MainLayout title="Favoritos">
+    <header class="favorites__header">
+        <nav>
+            <div class="favorites__header__left">
+                <a href="" class="favorites__header__left--menuButton">
+                    <figure>
+                        <img src="" alt="">
+                    </figure>
+                </a>
+
+                <a href="" class="favorites__header__left--logo">
+                    <figure>
+                        <img src="" alt="">
+                    </figure>
+                </a>
+            </div>
+
+            <div class="favorites__header__center">
+                <div class="favorites__header__center--moviesButton">
+                    <a href=""></a>
+                </div>
+
+                <div class="favorites__header__center--actorsButton">
+                    <a href=""></a>
+                </div>
+            </div>
+
+            <div class="favorites__header__right">
+                <div class="favorites__header__right--searchButton">
+
+                </div>
+
+                <div class="favorites__header__right--profileButton">
+                    <a href="" class="favorites__header__right--profileButton">
+                        <figure>
+                            <img src="" alt="">
+                        </figure>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <main class="favorites__body">
+        <h1 class="favorites__title"></h1>
+
+        <section class="favorites__movies">
+            <h2 class="favorites__movies__title"></h2>
+            
+            <div class="favorites__movies__list">
+                <!-- movie cards -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="favorites__footer">
+        <div class="favorites__footer__center--top">
+            <a href="" class="favorites__footer__center--instagramButton"></a>
+                <figure></figure>
+            </a><a href="favorites__footer__center--twitterButton">
+                <figure></figure>
+            </a><a href="favorites__footer__center--mailButton">
+                <figure></figure>
+            </a>
+        </div>
+
+        <div class="favorites__footer__center--bottom">
+            <a href="" class="favorites__footer__center--termsButton"></a>
+            <a href="" class="favorites__footer__center--privacyButton"></a>
+        </div>
+    </footer>
+</MainLayout>
+
+  <style>
+ .favorites {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+  }
+  
+  .favorites__title {
+	font-size: 2rem;
+	margin-bottom: 1rem;
+  }
+
+  .favorites__movies,
+  .favorites__actors {
+	width: 100%;
+	max-width: 1200px;
+	padding: 1rem;
+	border-radius: 8px;
+	background-color: #f0f0f0;
+	margin-bottom: 1rem;
+  }
+
+  .favorites__movies__title,
+  .favorites__actors__title {
+	font-size: 1.5rem;
+	margin-bottom: 1rem;
+  }
+</style>

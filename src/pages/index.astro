@@ -3,47 +3,8 @@ import MainLayout from '../layout/MainLayout.astro';
 ---
 
 <MainLayout title="Favoritos">
-  <main class="favorites">
-
-	<h1 class="favorites__title">Favoritos</h1>
-
-	<section class="favorites__movies">
-		<h2 class="favorites__movies__title">Peliculas favoritas</h2>
-	</section>
-
-	<section class="favorites__actors">
-		<h2 class="favorites__actors__title">Actores favoritos</h2>
-	</section>
-	
-  </main>
+	<main>
+		<a href="/favoritesSection">Ir a Favoritos</a>
+	</main>
 </MainLayout>
 
-<style>
- .favorites {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-  }
-  
-
-  .favorites__title {
-	font-size: 2rem;
-	margin-bottom: 1rem;
-  }
-
-  .favorites__movies,
-  .favorites__actors {
-	width: 100%;
-	max-width: 1200px;
-	padding: 1rem;
-	border-radius: 8px;
-	background-color: #f0f0f0;
-	margin-bottom: 1rem;
-  }
-
-  .favorites__movies__title,
-  .favorites__actors__title {
-	font-size: 1.5rem;
-	margin-bottom: 1rem;
-  }
-</style>
