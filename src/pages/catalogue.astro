@@ -9,7 +9,7 @@ const response = await fetch(
 const { results: movies } = await response.json();
 ---
 
-<MainLayout title="Catalog of the movies">
+<MainLayout title="Movie Catalogue">
   <header class="headerCatalog">
     <h1 class="headerCatalog__title">Catalog of the movies</h1>
     <input
@@ -21,14 +21,17 @@ const { results: movies } = await response.json();
   </header>
   <div class="movieList">
     {
-      movies.map((movie) => (
+      movies.map((movie: {
+        poster_path: string;
+        title: string;
+        vote_average: number;
+      }) => (
         <MovieCard
           img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           title={movie.title}
           vote_average={movie.vote_average}
         />
-      ))
-    }
+      ))}
   </div>
   </MainLayout>
 
