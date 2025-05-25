@@ -1,20 +1,21 @@
 ---
 import MainLayout from '../layout/MainLayout.astro';
+import { ClientRouter } from "astro:transitions";
 ---
 
 <MainLayout title="Favoritos">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <header class="favorites__header">
         <nav>
             <div class="favorites__header__left">
                 <a href="" class="favorites__header__left--menuButton">
-                    <figure>
-                        <img src="" alt="">
-                    </figure>
+                    <i class="fa fa-bars"></i>
                 </a>
 
                 <a href="" class="favorites__header__left--logo">
                     <figure>
-                        <img src="" alt="">
+                        <img src="/images/placeholderlogo.gif" alt="">
                     </figure>
                 </a>
             </div>
@@ -37,14 +38,13 @@ import MainLayout from '../layout/MainLayout.astro';
                 <div class="favorites__header__right--profileButton">
                     <a href="" class="favorites__header__right--profileButton">
                         <figure>
-                            <img src="" alt="">
+                            <img src="/images/placegolderAvatar.png" alt="">
                         </figure>
                     </a>
                 </div>
             </div>
         </nav>
     </header>
-
 
     <main class="favorites__body">
         <h1 class="favorites__title"></h1>
@@ -76,31 +76,120 @@ import MainLayout from '../layout/MainLayout.astro';
     </footer>
 </MainLayout>
 
-  <style>
- .favorites {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-  }
-  
-  .favorites__title {
-	font-size: 2rem;
-	margin-bottom: 1rem;
-  }
+<style>
+  .favorites__header {
+  background: #222;
+  color: #fff;
+  padding: 1rem 0;
+}
 
-  .favorites__movies,
-  .favorites__actors {
-	width: 100%;
-	max-width: 1200px;
-	padding: 1rem;
-	border-radius: 8px;
-	background-color: #f0f0f0;
-	margin-bottom: 1rem;
-  }
+.favorites__header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
 
-  .favorites__movies__title,
-  .favorites__actors__title {
-	font-size: 1.5rem;
-	margin-bottom: 1rem;
+.favorites__header__left,
+.favorites__header__center,
+.favorites__header__right {
+  display: flex;
+  align-items: center;
+}
+
+.favorites__header__left--logo img,
+.favorites__header__right--profileButton img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.favorites__header__left--menuButton,
+.favorites__header__center--moviesButton a,
+.favorites__header__center--actorsButton a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 1rem;
+  font-size: 1.2rem;
+  transition: color 0.2s;
+}
+
+.favorites__header__left--menuButton:hover,
+.favorites__header__center--moviesButton a:hover,
+.favorites__header__center--actorsButton a:hover {
+  color: #ff9800;
+}
+
+.favorites__body {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.favorites__title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+.favorites__movies__title {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+.favorites__movies__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.favorites__footer {
+  background: #222;
+  color: #fff;
+  padding: 2rem 0 1rem 0;
+  margin-top: 3rem;
+}
+
+.favorites__footer__center--top,
+.favorites__footer__center--bottom {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.favorites__footer__center--top a,
+.favorites__footer__center--bottom a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+
+.favorites__footer__center--top a:hover,
+.favorites__footer__center--bottom a:hover {
+  background: #ff9800;
+  color: #222;
+}
+
+@media (max-width: 700px) {
+  .favorites__header nav,
+  .favorites__body {
+    flex-direction: column;
+    padding: 1rem;
   }
+  .favorites__movies__list {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
 </style>
