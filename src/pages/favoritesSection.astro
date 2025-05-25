@@ -1,6 +1,13 @@
 ---
 import MainLayout from '../layout/MainLayout.astro';
 import { ClientRouter } from "astro:transitions";
+
+import MovieCard from "../components/MovieCard.astro";
+const API_KEY = "0310e4379c92147528b85ea519393186";
+const response = await fetch(
+  `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=es-ES`,
+);
+const { results: movies } = await response.json();
 ---
 
 <MainLayout title="Favoritos">
@@ -22,17 +29,19 @@ import { ClientRouter } from "astro:transitions";
 
             <div class="favorites__header__center">
                 <div class="favorites__header__center--moviesButton">
-                    <a href=""></a>
+                    <a href="">Peliculas</a>
                 </div>
 
                 <div class="favorites__header__center--actorsButton">
-                    <a href=""></a>
+                    <a href="">Actores</a>
                 </div>
             </div>
 
             <div class="favorites__header__right">
                 <div class="favorites__header__right--searchButton">
-
+                    <a href="" class="favorites__header__right--searchButton">
+                        <i class="fa fa-search"></i>
+                    </a>
                 </div>
 
                 <div class="favorites__header__right--profileButton">
@@ -47,13 +56,24 @@ import { ClientRouter } from "astro:transitions";
     </header>
 
     <main class="favorites__body">
-        <h1 class="favorites__title"></h1>
+        <h1 class="favorites__title">Tus favoritos</h1>
 
-        <section class="favorites__movies">
-            <h2 class="favorites__movies__title"></h2>
-            
+        <section class="favorites__movies__cards">
             <div class="favorites__movies__list">
-                <!-- movie cards -->
+                <div class="movieList">
+                  {
+                    movies.map((movie: {
+                      poster_path: string;
+                      title: string;
+                      vote_average: number;
+                    }) => (
+                      <MovieCard
+                        img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                        title={movie.title}
+                        vote_average={movie.vote_average}
+                      />
+                    ))}
+                </div>
             </div>
         </section>
     </main>
@@ -64,32 +84,42 @@ import { ClientRouter } from "astro:transitions";
                 <figure></figure>
             </a><a href="favorites__footer__center--twitterButton">
                 <figure></figure>
-            </a><a href="favorites__footer__center--mailButton">
+            </a><a href="favorites__footer__center--mail">
                 <figure></figure>
             </a>
         </div>
 
         <div class="favorites__footer__center--bottom">
-            <a href="" class="favorites__footer__center--termsButton"></a>
-            <a href="" class="favorites__footer__center--privacyButton"></a>
+            <a href="" class="favorites__footer__center--terms"></a>
+            <a href="" class="favorites__footer__center--privacy"></a>
         </div>
     </footer>
 </MainLayout>
 
 <style>
-  .favorites__header {
+
+
+.favorites__body, .favorites__body::before, .favorites__body::after {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  width: 100%;
+  max-width: none;
+}
+  
+.favorites__header {
   background: #222;
-  color: #fff;
   padding: 1rem 0;
+  color: #fff;
 }
 
 .favorites__header nav {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1100px;
+  flex-direction: row;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem;
+  gap: 1rem;
+  flex-wrap: nowrap;
 }
 
 .favorites__header__left,
@@ -97,19 +127,24 @@ import { ClientRouter } from "astro:transitions";
 .favorites__header__right {
   display: flex;
   align-items: center;
+  width: fit-content;
+  margin: 0 auto;
 }
 
 .favorites__header__left--logo img,
 .favorites__header__right--profileButton img {
   width: 40px;
   height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   border-radius: 50%;
   background: #fff;
 }
 
 .favorites__header__left--menuButton,
 .favorites__header__center--moviesButton a,
-.favorites__header__center--actorsButton a {
+.favorites__header__center--actorsButton a,
+.favorites__header__right--searchButton i {
   color: #fff;
   text-decoration: none;
   margin-right: 1rem;
@@ -117,25 +152,14 @@ import { ClientRouter } from "astro:transitions";
   transition: color 0.2s;
 }
 
-.favorites__header__left--menuButton:hover,
-.favorites__header__center--moviesButton a:hover,
-.favorites__header__center--actorsButton a:hover {
-  color: #ff9800;
-}
-
-.favorites__body {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+.favorites__header__right{
 }
 
 .favorites__title {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  color: #222;
+  font-size: 2.5rem;
+  color: oklch(0.4 0.08 275);
+  text-align: center;
+  padding-top: 0.5rem;
 }
 
 .favorites__movies__title {
@@ -157,38 +181,31 @@ import { ClientRouter } from "astro:transitions";
   margin-top: 3rem;
 }
 
-.favorites__footer__center--top,
-.favorites__footer__center--bottom {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 1rem;
+.movieList {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
 
-.favorites__footer__center--top a,
-.favorites__footer__center--bottom a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.1rem;
-  transition: color 0.2s;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
+
+/* Tablets (≥768px) */
+@media screen and (min-width: 768px) {
+  /* Estilos para tablets */
+  
 }
 
-.favorites__footer__center--top a:hover,
-.favorites__footer__center--bottom a:hover {
-  background: #ff9800;
-  color: #222;
+/* Desktops (≥992px) */
+@media screen and (min-width: 992px) {
+  /* Estilos para desktops */
 }
 
-@media (max-width: 700px) {
-  .favorites__header nav,
-  .favorites__body {
-    flex-direction: column;
+/* Large desktops (≥1200px) */
+@media screen and (min-width: 1200px) {
+  .movieList {
     padding: 1rem;
-  }
-  .favorites__movies__list {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     gap: 1rem;
   }
 }

@@ -17,7 +17,7 @@ const { img, title, vote_average, id } = Astro.props;
     max-width: 350px;
     border: 1px solid oklch(0.85 0.1 275);
     border-radius: 20px;
-    padding: 1.5rem;
+    padding: 1rem;
     text-align: center;
     background-color: oklch(0.98 0.01 275);
     transition:0.2s ease;
@@ -34,7 +34,8 @@ const { img, title, vote_average, id } = Astro.props;
   }
 
   .movieCard img {
-  width: 100%; 
+  width: 150px; 
+  min-width: 150px;
   border-radius:15px;
   object-fit: cover; 
 
