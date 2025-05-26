@@ -1,10 +1,7 @@
 ---
-
-
-
 import MainLayout from "../../layout/MainLayout.astro";
 import MovieCard from "../../components/MovieCard.astro";
-
+import NavBar from '../../components/navBar.astro';
 
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
@@ -27,9 +24,12 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 const { page } = Astro.props;
 ---
 
+
 <MainLayout title="Movie Catalogue">
+  
   <header class="header-catalog">
-    <h1 class="header-catalog__title">Catalog of the movies</h1>
+    <NavBar />
+    <h1 class="header-catalog__title">Movie Catalogue</h1>
     <input
       type="text"
       class="header-catalog__search"
@@ -73,7 +73,7 @@ const { page } = Astro.props;
   <style>
 
     .header-catalog {
-    padding: 3rem 2rem;
+    padding-bottom: 3rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;

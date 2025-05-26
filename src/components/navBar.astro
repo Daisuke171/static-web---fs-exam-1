@@ -1,0 +1,94 @@
+---
+
+---
+
+    <header class="favorites__header">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <nav>
+            <div class="favorites__header__left">
+                <a href="" class="favorites__header__left--menuButton">
+                    <i class="fa fa-bars"></i>
+                </a>
+
+                <a href="" class="favorites__header__left--logo">
+                    <figure>
+                        <img src="/images/placeholderlogo.gif" alt="">
+                    </figure>
+                </a>
+            </div>
+
+            <div class="favorites__header__center">
+                <div class="favorites__header__center--moviesButton">
+                    <a href="/movies/1">Peliculas</a>
+                </div>
+
+                <div class="favorites__header__center--actorsButton">
+                    <a href="">Actores</a>
+                </div>
+            </div>
+
+            <div class="favorites__header__right">
+                <div class="favorites__header__right--searchButton">
+                    <a href="" class="favorites__header__right--searchButton">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </div>
+
+                <div class="favorites__header__right--profileButton">
+                    <a href="../user" class="favorites__header__right--profileButton">
+                        <figure>
+                            <img src="/images/placegolderAvatar.png" alt="">
+                        </figure>
+                    </a>
+                </div>
+            </div>
+        </nav>
+</header>
+
+<style>
+    .favorites__header {
+    background: oklch(0.1751 0.0074 103 / 53.1%);
+    padding: 1rem 0;
+    color: #fff;
+    }
+
+    .favorites__header nav {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    padding: 0 1rem;
+    gap: 1rem;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    }
+
+    .favorites__header__left,
+    .favorites__header__center,
+    .favorites__header__right {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    
+    }
+
+    .favorites__header__left--logo img,
+    .favorites__header__right--profileButton img {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 50%;
+    background: #fff;
+    }
+
+    .favorites__header__left--menuButton,
+    .favorites__header__center--moviesButton a,
+    .favorites__header__center--actorsButton a,
+    .favorites__header__right--searchButton i {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 2rem;
+    font-size: 1.2rem;
+    transition: color 0.2s;
+    }
+</style>
