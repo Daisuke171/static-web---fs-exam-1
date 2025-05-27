@@ -2,7 +2,7 @@
 import MainLayout from "../../layout/MainLayout.astro";
 import MovieCard from "../../components/MovieCard.astro";
 import NavBar from '../../components/navBar.astro';
-
+import type { GetStaticPaths } from 'astro';
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const API_KEY = "26556575658af780cf7d1cdfa28bc314";
@@ -18,10 +18,23 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
     movies.push(...data.results);
   }
 
-  return paginate(movies, { pageSize, pageCount});
+  return paginate(movies, { pageSize });
 };
 
-const { page } = Astro.props;
+interface Movie {
+  poster_path: string;
+  title: string;
+  vote_average: number;
+  id: number;
+}
+
+interface Page {
+  data: Movie[];
+  currentPage: number;
+  lastPage: number;
+}
+
+const { page } = Astro.props as { page: Page };
 ---
 
 
@@ -45,12 +58,13 @@ const { page } = Astro.props;
         poster_path: string;
         title: string;
         vote_average: number;
+        id: number;
       }) => (
         <MovieCard
-          class="movies-container__card"
           img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           title={movie.title}
           vote_average={movie.vote_average}
+          id={movie.id}
         />
       ))
     }

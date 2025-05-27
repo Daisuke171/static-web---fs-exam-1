@@ -1,5 +1,12 @@
 ---
 const { img, title, vote_average, id } = Astro.props;
+
+export interface Props {
+  img: string;
+  title: string;
+  vote_average: number;
+  id: number;
+}
 ---
 
 <article class="movie-card">
@@ -7,16 +14,15 @@ const { img, title, vote_average, id } = Astro.props;
     <img src={img} alt={`Póster de ${title}`} class="movie-card__image"/>
     <div class="movie-card__overlay">
       <span class="movie-card__rating">⭐ {vote_average.toFixed(1)}</span>
-      <a href={`/movie/${id}`} class="movie-card__link">Ver detalles</a>
+      <a href={`/movies/${id}`} class="movie-card__link">Ver detalles</a>
     </div>
   </div>
   <h3 class="movie-card__title">
-    <a href={`/movie/${id}`}>{title}</a>
+    <a href={`/movies/${id}`}>{title}</a>
   </h3>
 </article>
 
 <style>
-
   :root {
     /* Color Palette */
     --color-primary: oklch(0.55 0.25 275);       /* azul */
