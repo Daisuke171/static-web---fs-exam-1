@@ -1,181 +1,187 @@
 ---
 import MainLayout from "../../layout/MainLayout.astro";
 import MovieCard from "../../components/MovieCard.astro";
+import NavBar from '../../components/navBar.astro';
+import type { GetStaticPaths } from 'astro';
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
-    const API_KEY = "26556575658af780cf7d1cdfa28bc314";
-    const pageCount = 18;
-    const pageSize = 24;
-    const movies = [];
+  const API_KEY = "26556575658af780cf7d1cdfa28bc314";
+  const pageCount = 18;
+  const pageSize = 24; 
+  const movies = [];
 
-    for (let i = 1; i <= pageCount; i++) {
-        const response = await fetch(
-            `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=es-ES&page=${i}`,
-        );
-        const data = await response.json();
-        movies.push(...data.results);
-    }
+  for (let i = 1; i <= pageCount; i++) {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=es-ES&page=${i}`
+    );
+    const data = await response.json();
+    movies.push(...data.results);
+  }
 
-    return paginate(movies, { pageSize, pageCount });
+  return paginate(movies, { pageSize });
 };
 
-const { page } = Astro.props;
+interface Movie {
+  poster_path: string;
+  title: string;
+  vote_average: number;
+  id: number;
+}
+
+interface Page {
+  data: Movie[];
+  currentPage: number;
+  lastPage: number;
+}
+
+const { page } = Astro.props as { page: Page };
 ---
 
+
 <MainLayout title="Movie Catalogue">
-    <header class="header-catalog">
-        <h1 class="header-catalog__title">Catalog of the movies</h1>
-        <input
-            type="text"
-            class="header-catalog__search"
-            placeholder="Search for a movie"
+  
+  <header class="header-catalog">
+    <NavBar />
+    <h1 class="header-catalog__title">Movie Catalogue</h1>
+    <input
+      type="text"
+      class="header-catalog__search"
+      placeholder="Search for a movie"
+    />
+    <button class="header-catalog__button">Search</button>
+
+  </header>
+<main>
+  <div class="movies-container">
+    {
+      page.data.map((movie: {
+        poster_path: string;
+        title: string;
+        vote_average: number;
+        id: number;
+      }) => (
+        <MovieCard
+          img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          title={movie.title}
+          vote_average={movie.vote_average}
+          id={movie.id}
         />
-        <button class="header-catalog__button">Search</button>
-    </header>
-    <main>
-        <div class="movies-container">
-            {
-                page.data.map
-                (
-                    (movie: {
-                        poster_path: string;
-                        title: string;
-                        vote_average: number;
-                    }) => (
-                        <MovieCard
-                            class="movies-container__card"
-                            img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                            title={movie.title}
-                            vote_average={movie.vote_average}
-                        />
-                    ),
-                )
-            }
-        </div>
-    </main>
-    <footer class="footer">
-        <nav class="footer-nav">
-            <a href="/movies/1" class="footer-nav__link">Inicio</a>
-            {
-                page.currentPage > 1 && (
-                    <a
-                        href={`/movies/${page.currentPage - 1}`}
-                        class="footer-nav__link"
-                    >
-                        Anterior
-                    </a>
-                )
-            }
-            {
-                page.currentPage<page.lastPage && (
-                    <a
-                        href={`/movies/${page.currentPage + 1}`}
-                        class="footer-nav__link"
-                    >
-                        Siguiente
-                    </a>
-                )
-            }
-            <span class="footer-nav__info"
-                >Página {page.currentPage} de {page.lastPage}</span
-            >
-        </nav>
-    </footer>
-</MainLayout>
+      ))
+    }
+  </div>
+</main>
+<footer class="footer">
+  <nav class="footer-nav">
+    <a href="/movies/1" class="footer-nav__link">Inicio</a>
+    {page.currentPage > 1 && (
+      <a href={`/movies/${page.currentPage - 1}`} class="footer-nav__link">Anterior</a>
+    )}
+    {page.currentPage < page.lastPage && (
+      <a href={`/movies/${page.currentPage + 1}`} class="footer-nav__link">Siguiente</a>
+    )}
+    <span class="footer-nav__info">Página {page.currentPage} de {page.lastPage}</span>
+  </nav>
+</footer>
+  </MainLayout>
 
-<style>
+  <style>
+
     .header-catalog {
-        padding: 3rem 2rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        align-items: center;
-        background: var(--gradient-primary);
-        color: var(--color-light);
-    }
+    padding-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    background: var(--gradient-primary);
+    color: var(--color-light);  
+  }
 
-    .header-catalog__title {
-        font-size: 3.5rem;
-        margin: 0;
-        background: linear-gradient(
-            to right,
-            var(--color-light),
-            var(--color-accent)
-        );
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-        font-weight: var(--font-weight-bold);
-        font-family: var(--font-main);
-    }
+
+  .header-catalog__title {
+    font-size: 3.5rem;
+    text-align: center;
+    margin: 0;
+    background: linear-gradient(to right, var(--color-light), var(--color-accent));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: var(--font-weight-bold);
+    font-family: var(--font-main);
+   }
 
     .header-catalog__search {
-        width: 100%;
-        max-width: 350px;
-        padding: 1em;
-        border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        background-color: rgba(255, 255, 255, 0.1);
+      width: 100%;
+      max-width: 350px;
+      padding: 1em ;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.4);
+      background-color: rgba(255,255,255,0.1);
+      
+       
     }
     .header-catalog__search::placeholder {
-        color: var(--color-light);
-        font-family: var(--font-main);
-        font-weight: var(--font-weight-regular);
+      color: var(--color-light);
+      font-family: var(--font-main);
+      font-weight: var(--font-weight-regular);
     }
 
     .header-catalog__button {
-        padding: 0.5em 1.5em;
-        border-radius: 20px;
-        border: none;
-        background-color: var(--color-accent);
-        color: var(--color-dark);
-        cursor: pointer;
-        transition: all 0.3s ease;
+      width: fit-content;
+      padding: 0.5em 1.5em;
+      border-radius: 20px;
+      border: none;
+      background-color: var(--color-accent);
+      color: var(--color-dark);
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
     .header-catalog__button:hover {
-        background-color: var(--color-light);
+      background-color: var(--color-light);
     }
 
-    .movies-container {
-        background-color: var(--color-dark);
-        padding: 2rem;
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        gap: 2rem;
-        justify-items: center;
+    .movies-container
+    {
+      background-color: var(--color-dark);
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr); 
+      gap: 2rem;
+      justify-items: center;
     }
 
     .footer {
-        background: var(--color-dark);
-        color: var(--color-light);
-        padding: 2rem 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-top: 2px solid var(--color-primary);
-    }
+  background: var(--color-dark);
+  color: var(--color-light);
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 2px solid var(--color-primary);
+}
 
-    .footer-nav {
-        display: flex;
-        gap: 1.5rem;
-        align-items: center;
-        font-family: var(--font-main);
-    }
+.footer-nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  font-family: var(--font-main);
+}
 
-    .footer-nav__link {
-        color: var(--color-accent);
-        text-decoration: none;
-        font-weight: var(--font-weight-medium);
-        transition: color 0.3s ease;
-    }
+.footer-nav__link {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: color 0.3s ease;
+}
 
-    .footer-nav__link:hover {
-        color: var(--color-light);
-    }
+.footer-nav__link:hover {
+  color: var(--color-light);
+}
 
-    .footer-nav__info {
-        font-size: 1rem;
-        font-weight: var(--font-weight-regular);
-        color: var(--color-light);
-    }
-</style>
+.footer-nav__info {
+  font-size: 1rem;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-light);
+}
+    
+    
+  </style>
