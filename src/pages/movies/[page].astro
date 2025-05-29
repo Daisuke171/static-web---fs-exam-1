@@ -3,6 +3,7 @@ import MainLayout from "../../layout/MainLayout.astro";
 import MovieCard from "../../components/MovieCard.astro";
 import NavBar from '../../components/navBar.astro';
 import type { GetStaticPaths } from 'astro';
+import { slugify } from '../../utils/slugify';
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const API_KEY = "26556575658af780cf7d1cdfa28bc314";
@@ -65,6 +66,7 @@ const { page } = Astro.props as { page: Page };
           title={movie.title}
           vote_average={movie.vote_average}
           id={movie.id}
+          slug={`${slugify(movie.title)}-${movie.id}`}
         />
       ))
     }
