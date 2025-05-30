@@ -1,7 +1,7 @@
 ---
 import MainLayout from "../../layout/MainLayout.astro";
 import MovieCard from "../../components/MovieCard.astro";
-import NavBar from '../../components/navBar.astro';
+
 import type { GetStaticPaths } from 'astro';
 import { slugify } from '../../utils/slugify';
 
@@ -42,7 +42,6 @@ const { page } = Astro.props as { page: Page };
 <MainLayout title="Movie Catalogue">
   
   <header class="header-catalog">
-    <NavBar />
     <h1 class="header-catalog__title">Movie Catalogue</h1>
     <input
       type="text"
@@ -89,7 +88,7 @@ const { page } = Astro.props as { page: Page };
   <style>
 
     .header-catalog {
-    padding-bottom: 3rem;
+    padding: 3rem 2rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
