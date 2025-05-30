@@ -107,6 +107,7 @@ const movie = await response.json();
     min-height: 100vh;
     color: var(--color-text);
     font-family: var(--font-main);
+    align-items: center;
   }
 
   /* Fondo cinematográfico */
@@ -128,9 +129,9 @@ const movie = await response.json();
     height: 100%;
     background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.8) 0%,
-      rgba(0, 0, 0, 0.4) 50%,
-      rgba(0, 0, 0, 0.8) 100%
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.2) 50%,
+      rgba(0, 0, 0, 0.6) 100%
     );
   }
 
@@ -147,7 +148,7 @@ const movie = await response.json();
     position: relative;
     max-width: 1080px;
     margin: 0 auto;
-    padding: 4rem;
+    padding: 10rem 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
@@ -188,12 +189,14 @@ const movie = await response.json();
     font-size: 2.6rem;
     font-weight: var(--font-weight-bold);
     color: var(--color-accent);
+    text-shadow: var(--gradient-dark);
   }
   .movie__rating-max {
     font-size: 1.2rem;
     color: var(--color-text);
     opacity:0.6;
     align-self: flex-end;
+    text-shadow: var(--gradient-dark);
   }
 
   /* Información de la película */
@@ -211,17 +214,19 @@ const movie = await response.json();
   }
 
   .movie__title{
-    font-size: 2.6rem;
+    font-size: 3rem;
     font-weight: var(--font-weight-bold);
     color: var(--color-text);
     margin: 0;
+    line-height: 1.2;
+    text-shadow: var(--gradient-dark);
   }
 
   .movie__meta {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     color: var(--color-text);
     text-shadow: var(--gradient-dark);
   }
@@ -229,6 +234,7 @@ const movie = await response.json();
   .movie__release-date,
   .movie__runtime {
     font-weight: var(--font-weight-medium);
+    padding: 0.5rem 1rem;
   }
 
   .movie__genres {
@@ -237,14 +243,17 @@ const movie = await response.json();
     list-style: none;
     gap: 0.5rem;
     padding: 0;
+    margin:0;
   }
 
   .movie__genre{
-    background: linear-gradient(120deg,var(--color-accent ), var(--color-secondary));
-    color: var(--color-light);
+    background: linear-gradient(120deg,var(--color-accent ), var(--color-light));
+    color: var(--color-text);
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-weight: var(--font-weight-medium);
+    font-size: 0.9rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   }
 
   .movie__overview {
@@ -258,14 +267,19 @@ const movie = await response.json();
     font-weight: var(--font-weight-bold);
     color: var(--color-text);
     margin: 0;
-  }
-  .movie__overview-text {
-    font-size: 1.5rem;
-    line-height: 1.9rem;
-    color: var(--color-text);
-    margin: 0;
     text-shadow: var(--gradient-dark);
   }
+  .movie__overview-text {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color:var(--color-text);
+    margin: 0;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+  }
 
 
 
+</style>
