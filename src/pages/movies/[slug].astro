@@ -87,6 +87,9 @@ const movie = await response.json();
       </article>
     </section>
   </main>
+  <footer class="footer">
+  <nav class="footer-nav">
+    <a href="/movies/1" class="footer-nav__link">Inicio</a>
 </MainLayout>
 
 <style>
@@ -280,6 +283,34 @@ const movie = await response.json();
     backdrop-filter: blur(10px);
   }
 
+  .footer {
+  background: var(--color-dark);
+  color: var(--color-light);
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 2px solid var(--color-primary);
+}
 
+.footer-nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  font-family: var(--font-main);
+}
+
+.footer-nav__link {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: color 0.3s ease;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.footer-nav__link:hover {
+  color: var(--color-light);
+}
 
 </style>
