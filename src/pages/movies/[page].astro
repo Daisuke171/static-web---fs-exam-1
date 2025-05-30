@@ -74,7 +74,7 @@ const { page } = Astro.props as { page: Page };
 </main>
 <footer class="footer">
   <nav class="footer-nav">
-    <a href="/movies/1" class="footer-nav__link">Inicio</a>
+    <a href="/movie/1" class="footer-nav__link">Inicio</a>
     {page.currentPage > 1 && (
       <a href={`/movies/${page.currentPage - 1}`} class="footer-nav__link">Anterior</a>
     )}
@@ -184,6 +184,90 @@ const { page } = Astro.props as { page: Page };
   font-weight: var(--font-weight-regular);
   color: var(--color-light);
 }
+
+@media (max-width:1280px){
+
     
+  .header-catalog__title {
+    font-size: 2rem;
+   }
+
+    .header-catalog__search {
+      width: 80%;
+      max-width: 250px;
+      padding: 1em ;  
+    }
+
+   .movies-container{
+      grid-template-columns: repeat(4, 1fr); 
+     
+      
+   }
+
+
+}
+
+
+@media (max-width:720px){
+
     
+  .header-catalog__title {
+    font-size: 2rem;
+   }
+
+    .header-catalog__search {
+      width: 60%;
+      max-width: 250px;
+      padding: 1em ;  
+    }
+
+     .header-catalog__button {
+      width: fit-content;
+     }
+
+   .movies-container{
+      padding: 1rem;
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 1rem;
+      
+   }
+
+
+}
+
+
+@media (max-width:480px){
+
+    
+  .header-catalog__title {
+    font-size: 2rem;
+   }
+
+    .header-catalog__search {
+      width: 60%;
+      max-width: 250px;
+      padding: 1em ;  
+    }
+
+     .header-catalog__button {
+      width: fit-content;
+     }
+
+   .movies-container{
+      padding: 1rem;
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 1rem;
+      
+   }
+
+    }
+
+
+
+
+
+
+
+
+   
   </style>
