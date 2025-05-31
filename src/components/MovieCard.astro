@@ -7,7 +7,9 @@ export interface Props {
   vote_average: number;
   id: number;
   slug: string;
+  isCheck?: boolean;
 }
+
 ---
 
 <article class="movie-card">
@@ -49,6 +51,7 @@ export interface Props {
     <a href={`/movies/${slug}`}>{title}</a>
   </h3>
 </article>
+
 
 <style>
  .movie-card {
@@ -208,23 +211,21 @@ input:checked + .heart svg:nth-child(2) {
  
 </style>
 
-<script is:client>
+
+<script type="module" is:inline>
   document.addEventListener('DOMContentLoaded', () => {
-    // Obtener todos los checkboxes de la página
     const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
-    
-    // Cargar favoritos guardados en localStorage
     const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
     checkboxes.forEach((checkbox) => {
       const id = parseInt(checkbox.dataset.id);
 
-      // Si el id está en favoritos, marcar el checkbox
+      // Cargar estado guardado
       if (savedFavorites.includes(id)) {
         checkbox.checked = true;
       }
 
-      // Escuchar cambios en cada checkbox
+      // Escuchar cambios
       checkbox.addEventListener('change', () => {
         let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
@@ -237,6 +238,7 @@ input:checked + .heart svg:nth-child(2) {
         }
 
         localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
       });
     });
   });
