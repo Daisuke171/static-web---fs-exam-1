@@ -4,6 +4,10 @@ import NavBar from '../components/navBar.astro';
 
 ---
 
+<head>
+  <link rel="stylesheet" href="/styles/movie-card.css">
+</head>
+
 <MainLayout title="User Profile">
   <header class="userProfile__header">
     <NavBar />
@@ -71,16 +75,6 @@ import NavBar from '../components/navBar.astro';
     top: 1.25rem;
     }
 
-    .movies-container
-    {
-      background-color: var(--color-dark);
-      padding: 2rem;
-      display: grid;
-      grid-template-columns: repeat(6, 1fr); 
-      gap: 2rem;
-      justify-items: center;
-    }
-
 
    main {
     width: 100%;
@@ -99,6 +93,9 @@ import NavBar from '../components/navBar.astro';
     padding-top: 2.5rem;
     text-align: center;
 }    
+
+
+    
 
 </style>
 
