@@ -1,7 +1,6 @@
 ---
 const { img, title, vote_average, slug, id } = Astro.props;
 
-
 export interface Props {
   img: string;
   title: string;
@@ -12,13 +11,40 @@ export interface Props {
 ---
 
 <article class="movie-card">
+
   <div class="movie-card__image-container">
+
     <img src={img} alt={`Póster de ${title}`} class="movie-card__image"/>
+
+    <div class="movie-card__image-container__favBtn">
+        <div class="container">
+        <label for={`checkbox-${id}`}>
+          <div class="label">
+            <input type="checkbox" id={`checkbox-${id}`} data-id={id} />
+            <div class="heart">
+              <svg viewBox="0 0 544.582 544.582">
+                <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z">
+              </svg>
+              <svg viewBox="0 0 544.582 544.582">
+                <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z">
+              </svg>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+
     <div class="movie-card__overlay">
       <span class="movie-card__rating">⭐ {vote_average.toFixed(1)}</span>
       <a href={`/movies/${slug}`} class="movie-card__link">Ver detalles</a>
     </div>
+
   </div>
+
   <h3 class="movie-card__title">
     <a href={`/movies/${slug}`}>{title}</a>
   </h3>
@@ -121,4 +147,97 @@ export interface Props {
   .movie-card__title a:hover {
     color: var(--color-accent);
   }
+
+  .movie-card__image-container__favBtn{
+    position: absolute;
+    top: 5px;
+    left: 125px;
+    padding: 0.5rem;
+    display: flex;
+    
+  }
+
+.label {
+  height: 40px;
+  width: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 20px;
+  background: #e6e6e6;
+  box-shadow: 0px 0px 40px #18181816, 0px 0px 40px #3d3d3d10;
+  cursor: pointer;
+}
+
+.heart {
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+svg {
+  height: 25px;
+  fill: rgb(168, 170, 181);
+  transition: all 500ms ease-in-out;
+}
+
+svg:nth-child(2) {
+  position: absolute;
+  z-index: 2;
+}
+
+input {
+  display: none;
+}
+
+input:checked + .heart svg {
+  fill: red;
+}
+
+input:checked + .heart svg:nth-child(2) {
+  filter: opacity(1);
+  animation: heart 0.3s linear forwards;
+}
+
+@keyframes heart {
+  to {
+    transform: scale(1.4);
+    filter: opacity(0);
+    fill: red;
+  }
+}
+ 
 </style>
+
+<script is:client>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Obtener todos los checkboxes de la página
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    
+    // Cargar favoritos guardados en localStorage
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Si el id está en favoritos, marcar el checkbox
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Escuchar cambios en cada checkbox
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+      });
+    });
+  });
+</script>

@@ -18,6 +18,10 @@
             </div>
 
             <div class="favorites__header__center">
+                <div class="favorites__header__center--home">
+                    <a href="/main/Homepage">Inicio</a>
+                </div>
+
                 <div class="favorites__header__center--moviesButton">
                     <a href="/movies/1">Peliculas</a>
                 </div>
@@ -84,6 +88,7 @@
     .favorites__header__left--menuButton,
     .favorites__header__center--moviesButton a,
     .favorites__header__center--actorsButton a,
+    .favorites__header__center--home a,
     .favorites__header__right--searchButton i {
     color: #fff;
     text-decoration: none;
@@ -91,60 +96,4 @@
     font-size: 1.2rem;
     transition: color 0.2s;
     }
-
-    @media (max-width:720px){
-
-         .favorites__header {
-    height: 4rem;
-    }
-    
-    .favorites__header__left--logo img,
-    .favorites__header__right--profileButton img {
-    width: 30px;
-    height: 30px;
-    min-width: 30px;
-    min-height: 30px;
-    border-radius: 50%;
-    }
-
-    .favorites__header__left--menuButton,
-    .favorites__header__center--moviesButton a,
-    .favorites__header__center--actorsButton a,
-    .favorites__header__right--searchButton i {
-    font-size: 1rem;
-    }
-
-    }
-
-@media (max-width: 480px) {
-   
-    .favorites__header {
-    background: oklch(0.1751 0.0074 103 / 53.1%);
-    padding: 1rem 0;
-    color: #fff;
-    height: 3.5rem;
-    }
-
-    .favorites__header__left--logo img,
-    .favorites__header__right--profileButton img {
-    width: 30px;
-    height: 30px;
-    min-width: 30px;
-    min-height: 30px;
-    border-radius: 50%;
-    }
-
-    .favorites__header__left--menuButton,
-    .favorites__header__center--moviesButton a,
-    .favorites__header__center--actorsButton a,
-    .favorites__header__right--searchButton i {
-    font-size: 1rem;
-    }
- 
-    
-  }
-
-
-
-
 </style>
