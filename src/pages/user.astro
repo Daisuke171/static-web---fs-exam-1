@@ -2,13 +2,15 @@
 import MainLayout from '../layout/MainLayout.astro';
 import NavBar from '../components/navBar.astro';
 
+import { ClientRouter } from "astro:transitions";
 ---
 
 <head>
   <link rel="stylesheet" href="/styles/movie-card.css">
 </head>
 
-<MainLayout title="User Profile">
+<MainLayout title="User Profile" >
+  <ClientRouter />
   <header class="userProfile__header">
     <NavBar />
     <div class="userDetail">
@@ -21,7 +23,7 @@ import NavBar from '../components/navBar.astro';
 
   <main>
     <h1 class="userProfile__favoritesTitle">Tus favoritos</h1>
-    <div id="favorites-container" class="movies-container"></div>
+    <div id="favorites-container" class="movies-container" ></div>
   </main>
 
   <script type="module" src="/scripts/renderFavorites.js"></script>
@@ -96,7 +98,7 @@ import NavBar from '../components/navBar.astro';
 }    
 
 
-    
+
 
 </style>
 

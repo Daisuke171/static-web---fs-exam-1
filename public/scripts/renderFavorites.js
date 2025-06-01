@@ -1,6 +1,7 @@
 const API_KEY = "26556575658af780cf7d1cdfa28bc314";
 const container = document.getElementById("favorites-container");
 
+
 async function fetchFavoriteMovies(ids) {
   const moviePromises = ids.map(id =>
     fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=es-ES`)
@@ -44,14 +45,21 @@ function createMovieCard({ poster_path, title, vote_average, id }) {
       </div>
       <h3 class="movie-card__title"><a href="/movies/${slug}">${title}</a></h3>
     </article>
-
+  
     
   `;
   return card.firstElementChild;
 }
 
 (async function renderFavorites() {
+  const container = document.getElementById("favorites-container");
+  if (!container) return;
+
+  container.innerHTML = "";
+
   const favIds = JSON.parse(localStorage.getItem("favorites")) || [];
+  
+
   if (favIds.length === 0) {
     container.innerHTML = "<p style='color: white;'>No hay películas favoritas.</p>";
     return;
@@ -63,3 +71,4 @@ function createMovieCard({ poster_path, title, vote_average, id }) {
     container.appendChild(card);
   });
 })();
+

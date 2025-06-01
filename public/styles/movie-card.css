@@ -104,13 +104,11 @@
     color: var(--color-accent);
   }
 
-  .movie-card__image-container__favBtn{
+.movie-card__image-container__favBtn{
+    width: fit-content;
     position: absolute;
-    top: 5px;
-    left: 125px;
-    padding: 0.5rem;
-    display: flex;
-    
+    top: 10px;
+    right: 10px;
   }
 
 .label {
