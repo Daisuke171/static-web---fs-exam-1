@@ -2,35 +2,45 @@
 
 ---
 
+<script is:client>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtn = document.getElementById("menu-toggle");
+    const menu = document.getElementById("nav-menu");
+
+    if (toggleBtn && menu) {
+      toggleBtn.addEventListener("click", () => {
+        menu.classList.toggle("is-hidden");
+      });
+    }
+  });
+</script>
+
+
     <header class="favorites__header">
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <nav>
             <div class="favorites__header__left">
-                <a href="" class="favorites__header__left--menuButton">
-                    <i class="fa fa-bars"></i>
-                </a>
-
-                <a href="" class="favorites__header__left--logo">
+              <button id="menu-toggle" class="favorites__header__left--menuButton" aria-label="Abrir menú">
+                     <i class="fa fa-bars"></i>
+               </button>
+                <a href="../contact" class="favorites__header__left--logo">
                     <figure>
                         <img src="/images/placeholderlogo.gif" alt="">
                     </figure>
                 </a>
             </div>
 
-            <div class="favorites__header__center">
-                <div class="favorites__header__center--home">
-                    <a href="/main/Homepage">Inicio</a>
-                </div>
-
-                <div class="favorites__header__center--moviesButton">
-                    <a href="/movies/1">Peliculas</a>
-                </div>
-
-                <div class="favorites__header__center--actorsButton">
-                    <a href="">Actores</a>
-                </div>
+            <div class="favorites__header__center is-hidden" id="nav-menu">
+            <div class="favorites__header__center--home">
+                <a href="/main/Homepage">Inicio</a>
+           </div>
+            <div class="favorites__header__center--moviesButton">
+                 <a href="/movies/1">Peliculas</a>
+           </div>
+            <div class="favorites__header__center--actorsButton">
+                  <a href="">Actores</a>
             </div>
-
+            </div>   
             <div class="favorites__header__right">
                 <div class="favorites__header__right--searchButton">
                     <a href="" class="favorites__header__right--searchButton">
@@ -54,6 +64,8 @@
     background: oklch(0.1751 0.0074 103 / 53.1%);
     padding: 1rem 0;
     color: #fff;
+    font-weight: var(--font-weight-bold);
+    font-family: var(--font-main)
     }
 
     .favorites__header nav {
@@ -96,4 +108,31 @@
     font-size: 1.2rem;
     transition: color 0.2s;
     }
-</style>
+
+
+.is-hidden {
+  display: none;
+}
+
+
+@media (max-width: 768px) {
+  .favorites__header__center {
+    flex-direction: column;
+    position: absolute;
+    top: 70px; 
+    left: 0;
+    width: 100%;
+    background: #222;
+    padding: 1rem;
+    z-index: 999;
+  }
+
+  .favorites__header__center a {
+    margin: 0.5rem 0;
+    color: white;
+  }
+}
+
+
+
+</style> 
