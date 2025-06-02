@@ -1,0 +1,267 @@
+---
+import MainLayout from '../../layout/MainLayout.astro';
+import type { GetStaticPaths } from 'astro';
+import { slugify } from '../../utils/slugify';
+
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const API_KEY = "1e7a7835f074482139d752775addeb5e";
+  const pageCount = 18;
+  const actors = [];
+
+  for (let i = 1; i <= pageCount; i++) {
+    const response = await fetch(`https://api.themoviedb.org/3/person/popular?api_key=${API_KEY}&language=es-ES&page=${i}`);
+    const data = await response.json();
+    actors.push(...data.results);
+  }
+
+  return actors.map(actor => ({
+    params: { slug: `${slugify(actor.name)}-${actor.id}` },
+    props: { actor },
+  }));
+};
+
+const { slug } = Astro.params;
+const id = String(slug).split('-').pop();
+const API_KEY = "1e7a7835f074482139d752775addeb5e";
+const response = await fetch(`https://api.themoviedb.org/3/person/${id}?api_key=${API_KEY}&language=es-ES`);
+const actor = await response.json();
+---
+
+
+<MainLayout title={actor.title}>
+
+  <main class="actor">
+    <section class="movie__content">
+      <aside class="movie__poster-wrapper">
+        <img 
+          src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`} 
+          alt={`Póster de ${actor.name}`} 
+          class="movie__poster"
+        />
+        <div class="movie__rating">
+          <span class="movie__rating-value">{actor.popularity.toFixed(1)}</span>
+          <span class="movie__rating-max">/10</span>
+        </div>
+      </aside>
+
+      <article class="movie__info">
+        <header class="movie__header">
+          <h1 class="movie__title">{actor.name}</h1>
+          <div class="movie__meta">
+            {actor.genres && (
+              <ul class="movie__genres">
+                {actor.genres.map(genre => (
+                  <li class="movie__genre">{genre.name}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </header>
+          <div class="movie__overview">
+            <h2 class="movie__overview-title">Sinopsis</h2>
+            <p class="movie__overview-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tincidunt quam at placerat porttitor. Donec velit mauris, consectetur vel feugiat vitae, tempor placerat nunc. Duis rhoncus facilisis convallis. Sed fringilla lacus diam, a tempor nulla facilisis ut. Nam in neque nisl. Morbi interdum eu tortor et lacinia. Vestibulum a dapibus eros, ac venenatis quam. Nullam mollis eu elit quis laoreet. Pellentesque consequat ultricies dolor, vitae blandit arcu molestie ut. Donec et mi a enim mollis aliquam. Integer nisi metus, consectetur in hendrerit ut, tincidunt et sem.</p>
+          </div>
+        </section>
+      </article>
+    </section>
+  </main>
+  <footer class="footer">
+  <nav class="footer-nav">
+    <a href="/actors/1" class="footer-nav__link">Inicio</a>
+</MainLayout>
+
+<style>
+  :root {
+    --color-primary: oklch(0.55 0.22 275);       /* Azul brillante*/
+    --color-secondary: oklch(0.3667 0.013 277.41);        /* Rosa suave */
+    --color-accent: oklch(0.65 0.2 180);         /* Cian brillante */
+    --color-dark: oklch(0.25 0.02 265);          /* Azul oscuro sofisticado */
+    --color-light: oklch(0.98 0.01 100);         /* Blanco puro */
+    --color-text: oklch(1 0 277.41);          /* Texto principal */
+    --color-text-secondary: oklch(0.8 0.01 100); /* Texto secundario */
+    
+  }
+
+
+  .movie {
+    position: relative;
+    min-height: 100vh;
+    color: var(--color-text);
+    font-family: var(--font-main);
+    align-items: center;
+  }
+
+
+  /* Contenido principal */
+  .movie__content {
+    position: relative;
+    width: 100%;
+    padding: 10rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: flex-end;
+    background: var(--gradient-primary);
+    color: var(--color-light);  
+    color: var(--color-light);
+  }
+
+  /* Póster de la película */
+  .movie__poster-wrapper {
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+
+  }
+  .movie__poster-wrapper:hover {
+    transform: translateY(-10px) scale(1.02);
+  }
+
+  .movie__poster {
+    width: 100%;
+    display: block;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+  }
+
+ .movie__rating {
+    
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-glass);
+    backdrop-filter: blur(10px);
+  }
+  .movie__rating-value {
+    font-size: 2.6rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-accent);
+    text-shadow: var(--gradient-dark);
+  }
+  .movie__rating-max {
+    font-size: 1.2rem;
+    color: var(--color-text);
+    opacity:0.6;
+    align-self: flex-end;
+    text-shadow: var(--gradient-dark);
+  }
+
+  /* Información de la película */
+  .movie__info{
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding-bottom: 5rem;
+  }
+
+  .movie__header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .movie__title{
+    font-size: 3rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.2;
+    text-shadow: var(--gradient-dark);
+  }
+
+  .movie__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 1.1rem;
+    color: var(--color-text);
+    text-shadow: var(--gradient-dark);
+  }
+
+  .movie__release-date,
+  .movie__runtime {
+    font-weight: var(--font-weight-medium);
+    padding: 0.5rem 1rem;
+  }
+
+  .movie__genres {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 0.5rem;
+    padding: 0;
+    margin:0;
+  }
+
+  .movie__genre{
+    background: linear-gradient(120deg,var(--color-accent ), var(--color-light));
+    color: var(--color-text);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: var(--font-weight-medium);
+    font-size: 0.9rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .movie__overview {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+  }
+  .movie__overview-title {
+    font-size: 2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin: 0;
+    text-shadow: var(--gradient-dark);
+  }
+  .movie__overview-text {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color:var(--color-text);
+    margin: 0;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1.5rem;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+  }
+
+  .footer {
+  background: var(--color-dark);
+  color: var(--color-light);
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 2px solid var(--color-primary);
+}
+
+.footer-nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  font-family: var(--font-main);
+}
+
+.footer-nav__link {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: color 0.3s ease;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.footer-nav__link:hover {
+  color: var(--color-light);
+}
+
+</style>
