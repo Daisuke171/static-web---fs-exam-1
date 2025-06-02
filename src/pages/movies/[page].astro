@@ -41,6 +41,9 @@ const { page } = Astro.props as { page: Page };
 
 <MainLayout title="Movie Catalogue">
   <header class="header-catalog">
+  
+   <a href="/main/Homepage"> <button class="header-catalog__button-go-to-home">Volver a Inicio</button></a>
+   
     <NavBar />
     <h1 class="header-catalog__title">Movie Catalogue</h1>
     <input
@@ -152,6 +155,8 @@ const { page } = Astro.props as { page: Page };
     gap: 1.5rem;
     align-items: center;
     background: var(--gradient-primary);
+    color: var(--color-light);  
+ 
     color: var(--color-light);
   }
 
@@ -171,6 +176,32 @@ const { page } = Astro.props as { page: Page };
     font-family: var(--font-main);
   }
 
+    .header-catalog__search {
+      width: 100%;
+      max-width: 350px;
+      padding: 1em ;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.4);
+      background-color: rgba(255,255,255,0.1);
+      
+       
+    }
+    .header-catalog__search::placeholder {
+      color: var(--color-light);
+      font-family: var(--font-main);
+      font-weight: var(--font-weight-regular);
+    }
+
+    .header-catalog__button-go-to-home{
+      width: fit-content;
+      padding: 0.5em 1.5em;
+      border-radius: 20px;
+      border: none;
+      background: linear-gradient(to right, var(--color-light), var(--color-accent));
+      color: var(--color-dark);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
   .header-catalog__search {
     width: 100%;
     max-width: 350px;
