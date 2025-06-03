@@ -23,12 +23,28 @@
               <button id="menu-toggle" class="favorites__header__left--menuButton" aria-label="Abrir menú">
                      <i class="fa fa-bars"></i>
                </button>
+                <a href="" class="favorites__header__left--logo">
                 <a href="../contact" class="favorites__header__left--logo" data-astro-reload>
                     <figure>
                         <img src="/images/placeholderlogo.gif" alt="">
                     </figure>
                 </a>
             </div>
+            
+       <div class="favorites__header__center is-hidden" id="nav-menu">
+          <div class="favorites__header__center--home">
+                  <a href="/main/Homepage" data-astro-reload>Inicio</a>
+          </div>
+
+           <div class="favorites__header__center--moviesButton">
+                   <a href="/movies/1" data-astro-reload>Peliculas</a>
+            </div>
+
+           <div class="favorites__header__center--actorsButton">
+            <a href="">Actores</a>
+           </div>
+       </div>
+
 
             <div class="favorites__header__center is-hidden" id="nav-menu">
             <div class="favorites__header__center--home">
@@ -60,15 +76,15 @@
 </header>
 
 <style>
-    .favorites__header {
+  .favorites__header {
     background: oklch(0.1751 0.0074 103 / 53.1%);
     padding: 1rem 0;
     color: #fff;
     font-weight: var(--font-weight-bold);
-    font-family: var(--font-main)
-    }
+    font-family: var(--font-main);
+  }
 
-    .favorites__header nav {
+  .favorites__header nav {
     display: flex;
     flex-direction: row;
     margin: 0 auto;
@@ -76,63 +92,89 @@
     gap: 1rem;
     flex-wrap: nowrap;
     justify-content: space-between;
-    }
+  }
 
-    .favorites__header__left,
-    .favorites__header__center,
-    .favorites__header__right {
+  .favorites__header__left,
+  .favorites__header__center,
+  .favorites__header__right {
     display: flex;
     align-items: center;
     width: fit-content;
-    
-    }
+  }
 
-    .favorites__header__left--logo img,
-    .favorites__header__right--profileButton img {
+  .favorites__header__left--logo img,
+  .favorites__header__right--profileButton img {
     width: 40px;
     height: 40px;
     min-width: 40px;
     min-height: 40px;
     border-radius: 50%;
     background: #fff;
-    }
+  }
 
-    .favorites__header__left--menuButton,
-    .favorites__header__center--moviesButton a,
-    .favorites__header__center--actorsButton a,
-    .favorites__header__center--home a,
-    .favorites__header__right--searchButton i {
+  .favorites__header__left--menuButton,
+  .favorites__header__center--moviesButton a,
+  .favorites__header__center--actorsButton a,
+  .favorites__header__center--home a,
+  .favorites__header__right--searchButton i {
     color: #fff;
     text-decoration: none;
     margin-right: 2rem;
     font-size: 1.2rem;
     transition: color 0.2s;
+  }
+
+  .is-hidden {
+    display: none;
+  }
+
+  .favorites__header__left--menuButton {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+ 
+  @media (max-width: 768px) {
+    .favorites__header__left--menuButton {
+      display: block;
     }
 
+    .favorites__header__center {
+      flex-direction: column;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      background: #222;
+      padding: 1rem;
+      z-index: 999;
+      display: none; 
+    }
 
-.is-hidden {
-  display: none;
-}
+    .favorites__header__center a {
+      margin: 0.5rem 0;
+      color: white;
+    }
 
-
-@media (max-width: 768px) {
-  .favorites__header__center {
-    flex-direction: column;
-    position: absolute;
-    top: 70px; 
-    left: 0;
-    width: 100%;
-    background: #222;
-    padding: 1rem;
-    z-index: 999;
+ 
+    .favorites__header__center:not(.is-hidden) {
+      display: flex;
+    }
   }
 
-  .favorites__header__center a {
-    margin: 0.5rem 0;
-    color: white;
+  @media (min-width: 780px) {
+    .favorites__header__center {
+      display: flex !important;
+      position: static;
+      background: none;
+      flex-direction: row;
+      padding: 0;
+    }
+
+    .favorites__header__left--menuButton {
+      display: none;
+    }
   }
-}
-
-
-
-</style> 
+</style>

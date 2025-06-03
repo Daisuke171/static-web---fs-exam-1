@@ -147,18 +147,37 @@ const { page } = Astro.props as { page: Page };
 
 </script>
 
+
 <style>
-  .header-catalog {
-    padding-bottom: 3rem;
+  :root {
+    --color-background: var(--color-dark);
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: var(--color-background);
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    align-items: center;
-    background: var(--gradient-primary);
-    color: var(--color-light);  
- 
-    color: var(--color-light);
+    font-family: var(--font-main);
   }
+
+  main {
+    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .header-catalog {
+   padding-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  background: var(--gradient-primary);
+  color: var(--color-light);
+}
 
   .header-catalog__title {
     font-size: 3.5rem;
@@ -211,6 +230,7 @@ const { page } = Astro.props as { page: Page };
     border: 1px solid rgba(255, 255, 255, 0.4);
     background-color: rgba(255, 255, 255, 0.1);
   }
+
   .header-catalog__search::placeholder {
     color: var(--color-light);
     font-family: var(--font-main);
@@ -228,18 +248,24 @@ const { page } = Astro.props as { page: Page };
     transition: all 0.3s ease;
     font-size: 1.1rem;
   }
+
   .header-catalog__button:hover {
     background-color: var(--color-light);
   }
 
   .movies-container {
-    background-color: var(--color-dark);
-    padding: 2rem;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 2rem;
-    justify-items: center;
-  }
+  background-color: var(--color-dark);
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto; 
+}
+
 
   .footer {
     background: var(--color-dark);
@@ -274,5 +300,20 @@ const { page } = Astro.props as { page: Page };
     font-weight: var(--font-weight-regular);
     color: var(--color-light);
   }
+
+  @media (max-width: 720px){
+    .header-catalog__title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0;
+  }
+
+   @media (max-width: 420px){
+    .header-catalog__title {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0;
+  }
+
 </style>
 
