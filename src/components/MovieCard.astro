@@ -55,7 +55,8 @@ export interface Props {
 
 <style>
  .movie-card {
-    width: 100%;
+    min-width: 150px;
+    height: 100%;
     border-radius: 12px;
     overflow: hidden;
     background: rgba(255, 255, 255, 0.05);
@@ -152,12 +153,10 @@ export interface Props {
   }
 
   .movie-card__image-container__favBtn{
+    width: fit-content;
     position: absolute;
-    top: 5px;
-    left: 125px;
-    padding: 0.5rem;
-    display: flex;
-    
+    top: 10px;
+    right: 10px;
   }
 
 .label {
@@ -225,7 +224,7 @@ input:checked + .heart svg:nth-child(2) {
         checkbox.checked = true;
       }
 
-      // Escuchar cambios
+      // Ver cambios
       checkbox.addEventListener('change', () => {
         let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
@@ -242,4 +241,6 @@ input:checked + .heart svg:nth-child(2) {
       });
     });
   });
+
+  
 </script>

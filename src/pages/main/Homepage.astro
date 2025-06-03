@@ -16,7 +16,7 @@ const movies = data.results.slice(0, 5);
     <p class="header-catalog__description">Explora las películas más populares del momento</p>
   </header>
 
-  <main>
+  <main class="main-content">
     <section class="hero-section">
       {
         movies.map(movie => (
@@ -36,12 +36,32 @@ const movies = data.results.slice(0, 5);
   <footer class="footer">
     <nav class="footer-nav">
       <a href="/movies/1" class="footer-nav__link">Ver catálogo completo</a>
+      <a href="../contact" class="footer-nav__contac">Contáctanos</a>
     </nav>
   </footer>
 </MainLayout>
 
 <style>
 
+:root {
+  --color-background: var(--color-dark);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: var(--color-background);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-main);
+}
+
+main.main-content {
+  flex: 1;
+}
+
+/* Header */
 .header-catalog {
   padding-bottom: 3rem;
   display: flex;
@@ -61,43 +81,41 @@ const movies = data.results.slice(0, 5);
   -webkit-background-clip: text;
   color: transparent;
   font-weight: var(--font-weight-bold);
-  font-family: var(--font-main);
 }
 
 .header-catalog__description {
   font-size: 1.2rem;
   text-align: center;
   color: var(--color-light);
-  font-family: var(--font-main);
   max-width: 600px;
 }
 
-
+/* Hero section */
 .hero-section {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   padding: 2rem;
-  background-color: var(--color-dark);
 }
-
 
 .hero-card {
   display: grid;
   padding: 1rem;
-  grid-template-columns: repeat(2, 1fr); 
-      gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
   background-color: rgba(255, 255, 255, 0.05);
   color: var(--color-light);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  font-family: var(--font-main);
   transition: transform 0.3s ease;
 }
 
 .hero-card p {
-    max-width: 20em; 
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .hero-card:hover {
@@ -135,15 +153,13 @@ const movies = data.results.slice(0, 5);
 
 
 @media (min-width: 768px) {
-    
-   .header-catalog__title {
-  font-size: 3.5rem; 
+  .header-catalog__title {
+    font-size: 3.5rem;
   }
 
   .hero-card {
-     display: flex;  
-     flex-direction: row;
-    
+    display: flex;
+    flex-direction: row;
   }
 
   .hero-card__img {
@@ -155,14 +171,6 @@ const movies = data.results.slice(0, 5);
     flex: 1;
   }
 }
-
-
-
-
-
-
-
-
 
 
 .footer {
@@ -179,7 +187,6 @@ const movies = data.results.slice(0, 5);
   display: flex;
   gap: 1.5rem;
   align-items: center;
-  font-family: var(--font-main);
 }
 
 .footer-nav__link {
@@ -189,8 +196,16 @@ const movies = data.results.slice(0, 5);
   transition: color 0.3s ease;
 }
 
-.footer-nav__link:hover {
-  color: var(--color-light);
+.footer-nav__contac{
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: color 0.3s ease;
+  text-align: end;
 }
 
+.footer-nav__link:hover,
+.footer-nav__contac:hover {
+  color: var(--color-light);
+}
 </style>

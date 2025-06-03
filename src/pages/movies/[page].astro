@@ -3,18 +3,18 @@ import MainLayout from "../../layout/MainLayout.astro";
 import MovieCard from "../../components/MovieCard.astro";
 import NavBar from "../../components/navBar.astro";
 
-import type { GetStaticPaths } from 'astro';
-import { slugify } from '../../utils/slugify';
+import type { GetStaticPaths } from "astro";
+import { slugify } from "../../utils/slugify";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const API_KEY = "26556575658af780cf7d1cdfa28bc314";
   const pageCount = 18;
-  const pageSize = 24; 
+  const pageSize = 24;
   const movies = [];
 
   for (let i = 1; i <= pageCount; i++) {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=es-ES&page=${i}`
+      `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=es-ES&page=${i}`,
     );
     const data = await response.json();
     movies.push(...data.results);
@@ -39,13 +39,10 @@ interface Page {
 const { page } = Astro.props as { page: Page };
 ---
 
-
 <MainLayout title="Movie Catalogue">
-  
   <header class="header-catalog">
-  
-   <a href="/main/Homepage"> <button class="header-catalog__button-go-to-home">Volver a Inicio</button></a>
-   
+
+    <NavBar />
     <h1 class="header-catalog__title">Movie Catalogue</h1>
     <input
       type="text"
@@ -53,236 +50,242 @@ const { page } = Astro.props as { page: Page };
       placeholder="Search for a movie"
     />
     <button class="header-catalog__button">Search</button>
-
   </header>
-<main>
-  <div class="movies-container">
-    {
-      page.data.map((movie: {
-        poster_path: string;
-        title: string;
-        vote_average: number;
-        id: number;
-      }) => (
-        <MovieCard
-          img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          title={movie.title}
-          vote_average={movie.vote_average}
-          id={movie.id}
-          slug={`${slugify(movie.title)}-${movie.id}`}
-        />
-      ))
-    }
-  </div>
-</main>
-<footer class="footer">
-  <nav class="footer-nav">
-    <a href="/movie/1" class="footer-nav__link">Inicio</a>
-    {page.currentPage > 1 && (
-      <a href={`/movies/${page.currentPage - 1}`} class="footer-nav__link">Anterior</a>
-    )}
-    {page.currentPage < page.lastPage && (
-      <a href={`/movies/${page.currentPage + 1}`} class="footer-nav__link">Siguiente</a>
-    )}
-    <span class="footer-nav__info">Página {page.currentPage} de {page.lastPage}</span>
-  </nav>
-</footer>
-  </MainLayout>
+  <main>
+    <div class="movies-container">
+      {
+        page.data.map(
+          (movie: {
+            poster_path: string;
+            title: string;
+            vote_average: number;
+            id: number;
+          }) => (
+            <div class="movie-item" data-slug={`${slugify(movie.title)}-${movie.id}`}>
+              <MovieCard
+                img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                title={movie.title}
+                vote_average={movie.vote_average}
+                id={movie.id}
+                slug={`${slugify(movie.title)}-${movie.id}`}
+              />
+            </div>
+          ),
+        )
+      }
+    </div>
+  </main>
+  <footer class="footer">
+    <nav class="footer-nav">
+      <a href="/movies/1" class="footer-nav__link">Inicio</a>
+      {
+        page.currentPage > 1 && 
+        (
+          <a href={`/movies/${page.currentPage - 1}`} class="footer-nav__link">
+            Anterior
+          </a>
+        )
+      }
+      {
+        page.currentPage < page.lastPage &&
+        (
+          <a href={`/movies/${page.currentPage + 1}`} class="footer-nav__link">
+            Siguiente
+          </a>
+        )
+      }
+      <span class="footer-nav__info">
+        Página {page.currentPage} de {page.lastPage}
+      </span>
+    </nav>
+  </footer>
 
-  <style>
+</MainLayout>
 
-    .header-catalog {
-    padding: 3rem 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: center;
-    background: var(--gradient-primary);
-    color: var(--color-light);  
- 
+<script>
+  function slugify(title) {
+    return title
+      .toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/--+/g, '-')
+      .trim();
   }
 
+  const $button = document.querySelector('.header-catalog__button');
+  const $search = document.querySelector('.header-catalog__search');
+
+  $button.addEventListener('click', async () => {
+    const query = $search.value;
+    if (!query) {
+      alert('Please enter a movie title to search.');
+    }
+    const API_KEY="26556575658af780cf7d1cdfa28bc314";
+    let movieFound = false;
+
+    for (let i = 1; i <= 18 && !movieFound; i++) 
+    {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=es-ES&page=${i}`
+        );
+        const data = await response.json();
+        movieFound=data.results.find(movie=> 
+          slugify(movie.title).includes(slugify(query))
+        );
+        if (movieFound) {
+          window.location.href = `/movies/${slugify(movieFound.title)}-${movieFound.id}`;
+        }
+    } 
+    if (!movieFound) {
+      alert('No movies found with that title.');
+    }
+  });
+        
+
+</script>
+
+
+<style>
+  :root {
+    --color-background: var(--color-dark);
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-main);
+  }
+
+  main {
+    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .header-catalog {
+   padding-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  background: var(--gradient-primary);
+  color: var(--color-light);
+}
 
   .header-catalog__title {
     font-size: 3.5rem;
     text-align: center;
     margin: 0;
-    background: linear-gradient(to right, var(--color-light), var(--color-accent));
+    background: linear-gradient(
+      to right,
+      var(--color-light),
+      var(--color-accent)
+    );
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
     font-weight: var(--font-weight-bold);
     font-family: var(--font-main);
-   }
+  }
 
-    .header-catalog__search {
-      width: 100%;
-      max-width: 350px;
-      padding: 1em ;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,0.4);
-      background-color: rgba(255,255,255,0.1);
-      
-       
-    }
-    .header-catalog__search::placeholder {
-      color: var(--color-light);
-      font-family: var(--font-main);
-      font-weight: var(--font-weight-regular);
-    }
+  .header-catalog__search {
+    width: 100%;
+    max-width: 350px;
+    padding: 0.8em;
+    font-size: 1.2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 
-    .header-catalog__button-go-to-home{
-      width: fit-content;
-      padding: 0.5em 1.5em;
-      border-radius: 20px;
-      border: none;
-      background: linear-gradient(to right, var(--color-light), var(--color-accent));
-      color: var(--color-dark);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+  .header-catalog__search::placeholder {
+    color: var(--color-light);
+    font-family: var(--font-main);
+    font-weight: var(--font-weight-regular);
+  }
 
-    .header-catalog__button {
-      width: fit-content;
-      padding: 0.5em 1.5em;
-      border-radius: 20px;
-      border: none;
-      background-color: var(--color-accent);
-      color: var(--color-dark);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .header-catalog__button:hover {
-      background-color: var(--color-light);
-    }
+  .header-catalog__button {
+    width: fit-content;
+    padding: 0.7em 2em;
+    border-radius: 20px;
+    border: none;
+    background-color: var(--color-accent);
+    color: var(--color-dark);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+  }
 
-    .movies-container
-    {
-      background-color: var(--color-dark);
-      padding: 2rem;
-      display: grid;
-      grid-template-columns: repeat(6, 1fr); 
-      gap: 2rem;
-      justify-items: center;
-    }
+  .header-catalog__button:hover {
+    background-color: var(--color-light);
+  }
 
-    .footer {
-  background: var(--color-dark);
-  color: var(--color-light);
-  padding: 2rem 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top: 2px solid var(--color-primary);
-}
-
-.footer-nav {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-  font-family: var(--font-main);
-}
-
-.footer-nav__link {
-  color: var(--color-accent);
-  text-decoration: none;
-  font-weight: var(--font-weight-medium);
-  transition: color 0.3s ease;
-}
-
-.footer-nav__link:hover {
-  color: var(--color-light);
-}
-
-.footer-nav__info {
-  font-size: 1rem;
-  font-weight: var(--font-weight-regular);
-  color: var(--color-light);
-}
-
-@media (max-width:1280px){
-
-    
-  .header-catalog__title {
-    font-size: 2rem;
-   }
-
-    .header-catalog__search {
-      width: 80%;
-      max-width: 250px;
-      padding: 1em ;  
-    }
-
-   .movies-container{
-      grid-template-columns: repeat(4, 1fr); 
-     
-      
-   }
-
-
+  .movies-container {
+  background-color: var(--color-dark);
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 1600px;
+  margin: 0 auto; 
 }
 
 
-@media (max-width:720px){
+  .footer {
+    background: var(--color-dark);
+    color: var(--color-light);
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid var(--color-primary);
+  }
 
-    
-  .header-catalog__title {
-    font-size: 2rem;
-   }
+  .footer-nav {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    font-family: var(--font-main);
+  }
 
-    .header-catalog__search {
-      width: 60%;
-      max-width: 250px;
-      padding: 1em ;  
-    }
+  .footer-nav__link {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: color 0.3s ease;
+  }
 
-     .header-catalog__button {
-      width: fit-content;
-     }
+  .footer-nav__link:hover {
+    color: var(--color-light);
+  }
 
-   .movies-container{
-      padding: 1rem;
-      grid-template-columns: repeat(3, 1fr); 
-      gap: 1rem;
-      
-   }
+  .footer-nav__info {
+    font-size: 1rem;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-light);
+  }
 
+  @media (max-width: 720px){
+    .header-catalog__title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0;
+  }
 
-}
+   @media (max-width: 420px){
+    .header-catalog__title {
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0;
+  }
 
+</style>
 
-@media (max-width:480px){
-
-    
-  .header-catalog__title {
-    font-size: 2rem;
-   }
-
-    .header-catalog__search {
-      width: 60%;
-      max-width: 250px;
-      padding: 1em ;  
-    }
-
-     .header-catalog__button {
-      width: fit-content;
-     }
-
-   .movies-container{
-      padding: 1rem;
-      grid-template-columns: repeat(2, 1fr); 
-      gap: 1rem;
-      
-   }
-
-    }
-
-
-
-
-
-
-
-
-   
-  </style>
