@@ -81,11 +81,11 @@ const { page } = Astro.props as { page: Page };
 
   <footer class="footer">
     <nav class="footer-nav">
-      <a href="/actors/1" class="footer-nav__link">Inicio</a>
+      <a href="/actors/1" class="footer-nav__link" data-astro-reload>Inicio</a>
       {
         page.currentPage > 1 && 
         (
-          <a href={`/actors/${page.currentPage - 1}`} class="footer-nav__link">
+          <a href={`/actors/${page.currentPage - 1}`} class="footer-nav__link" data-astro-reload>
             Anterior
           </a>
         )
@@ -93,7 +93,7 @@ const { page } = Astro.props as { page: Page };
       {
         page.currentPage < page.lastPage &&
         (
-          <a href={`/actors/${page.currentPage + 1}`} class="footer-nav__link">
+          <a href={`/actors/${page.currentPage + 1}`} class="footer-nav__link" data-astro-reload>
             Siguiente
           </a>
         )
