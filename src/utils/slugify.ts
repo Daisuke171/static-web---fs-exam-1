@@ -3,5 +3,5 @@ export function slugify(title: string) {
     .toLowerCase()
     .replace(/ +/g, '_')
     .replace(/_+/g, '-')
-    .trim();                      // Quita espacios al principio/final
+    .trim();                     
 }

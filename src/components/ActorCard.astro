@@ -42,7 +42,7 @@ export interface Props {
 
     <div class="movie-card__overlay">
       <span class="movie-card__rating">❤️ {vote_average.toFixed(1)}</span>
-      <a href={`/actors/${slug}`} class="movie-card__link">Ver detalles</a>
+      <a href={`/actors/${slug}`} class="movie-card__link" data-astro-reload>Ver detalles</a>
     </div>
 
   </div>
@@ -214,7 +214,7 @@ input:checked + .heart svg:nth-child(2) {
 <script type="module" is:inline>
   document.addEventListener('DOMContentLoaded', () => {
     const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
-    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const savedFavorites = JSON.parse(localStorage.getItem('favoritesActors')) || [];
 
     checkboxes.forEach((checkbox) => {
       const id = parseInt(checkbox.dataset.id);
@@ -226,7 +226,7 @@ input:checked + .heart svg:nth-child(2) {
 
       // Ver cambios
       checkbox.addEventListener('change', () => {
-        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        let favorites = JSON.parse(localStorage.getItem('favoritesActors')) || [];
 
         if (checkbox.checked) {
           if (!favorites.includes(id)) {
@@ -237,6 +237,41 @@ input:checked + .heart svg:nth-child(2) {
         }
 
         localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script>
+
+
+<script type="module" is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favoritesActors')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favoritesActors')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favoritesActors', JSON.stringify(favorites));
         console.log("Cargando favoritos:", savedFavorites);
       });
     });

@@ -41,7 +41,7 @@ const actor = await response.json();
         />
         <div class="movie__rating">
           <span class="movie__rating-value">{actor.popularity.toFixed(1)}</span>
-          <span class="movie__rating-max">/10</span>
+          <span class="movie__rating-max">/100</span>
         </div>
       </aside>
 
@@ -68,7 +68,7 @@ const actor = await response.json();
   </main>
   <footer class="footer">
   <nav class="footer-nav">
-    <a href="/actors/1" class="footer-nav__link">Inicio</a>
+    <a href="/actors/1" class="footer-nav__link" data-astro-reload>Inicio</a>
 </MainLayout>
 
 <style>

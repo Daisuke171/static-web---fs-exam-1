@@ -1,4 +1,4 @@
-#favorites-container{
+#favorites-container, #favorites-container-actors{
     background-color: var(--color-dark);
     padding: 2rem;
     display: grid;
@@ -6,6 +6,8 @@
     gap: 2rem;
     justify-items: center;
 }
+
+
 
  .movie-card {
     width: 100%;

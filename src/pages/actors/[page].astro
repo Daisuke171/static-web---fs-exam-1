@@ -41,10 +41,10 @@ const { page } = Astro.props as { page: Page };
 
 <MainLayout title="Actor Catalogue">
   <header class="header-catalog">
-  
+  <NavBar />
    <a href="/main/Homepage"> <button class="header-catalog__button-go-to-home">Volver a Inicio</button></a>
    
-    <NavBar />
+    
     <h1 class="header-catalog__title">Actor Catalogue</h1>
     <input
       type="text"
@@ -149,9 +149,11 @@ const { page } = Astro.props as { page: Page };
 
 </script>
 
+
+
 <style>
   .header-catalog {
-    padding: 3rem 2rem;
+    padding-bottom: 3rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
