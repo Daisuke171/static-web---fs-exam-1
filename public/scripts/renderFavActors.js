@@ -39,7 +39,7 @@ function createActorCard({ profile_path, name, popularity, id }) {
         </div>
         <div class="movie-card__overlay">
           <span class="movie-card__rating">❤️ ${popularity.toFixed(1)}</span>
-          <a href="/movies/${slug}" class="movie-card__link">Ver detalles</a>
+          <a href="/actors/${slug}" class="movie-card__link">Ver detalles</a>
         </div>
       </div>
       <h3 class="movie-card__title"><a href="/movies/${slug}">${name}</a></h3>
