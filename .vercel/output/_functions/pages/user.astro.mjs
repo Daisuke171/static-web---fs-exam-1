@@ -1,6 +1,6 @@
 import { c as createComponent, f as renderHead, b as renderComponent, r as renderTemplate } from '../chunks/astro/server_Bg_fNKsD.mjs';
 import { $ as $$MainLayout, a as $$ClientRouter } from '../chunks/MainLayout_DYFgb4z7.mjs';
-import { $ as $$NavBar } from '../chunks/navBar_Cxq83Rt2.mjs';
+import { $ as $$NavBar } from '../chunks/navBar_DHAG_Ld2.mjs';
 /* empty css                                */
 export { renderers } from '../renderers.mjs';
 
