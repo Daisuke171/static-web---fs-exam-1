@@ -7,5 +7,5 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
   devToolbar: { enabled: false},
   adapter: vercel(),
-  output: "server"
+  output: "hybrid"
 });
