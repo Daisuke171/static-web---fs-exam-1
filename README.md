@@ -10,7 +10,7 @@ El proyecto es una maqueta para una pagina al estilo IMDB hecha con el framework
 ## 🔴 Integrantes
 - Ailen Roldan Franco
 - Jeremias Seisdedos 
-- Agustin Benitez
+- Agustin Alejandro Benitez
 
 ## 🧞 Comandos
 
