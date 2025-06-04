@@ -79,11 +79,11 @@ const { page } = Astro.props as { page: Page };
 
   <footer class="footer">
     <nav class="footer-nav">
-      <a href="/actors/1" class="footer-nav__link">Inicio</a>
+      <a href="/actors/1" class="footer-nav__link" data-astro-reload>Inicio</a>
       {
         page.currentPage > 1 && 
         (
-          <a href={`/actors/${page.currentPage - 1}`} class="footer-nav__link">
+          <a href={`/actors/${page.currentPage - 1}`} class="footer-nav__link" data-astro-reload>
             Anterior
           </a>
         )
@@ -91,7 +91,7 @@ const { page } = Astro.props as { page: Page };
       {
         page.currentPage < page.lastPage &&
         (
-          <a href={`/actors/${page.currentPage + 1}`} class="footer-nav__link">
+          <a href={`/actors/${page.currentPage + 1}`} class="footer-nav__link" data-astro-reload>
             Siguiente
           </a>
         )
@@ -121,26 +121,26 @@ const { page } = Astro.props as { page: Page };
   $button.addEventListener('click', async () => {
     const query = $search.value;
     if (!query) {
-      alert('Please enter a movie title to search.');
+      alert('Please enter the name of an actor');
     }
-    const API_KEY="26556575658af780cf7d1cdfa28bc314";
-    let movieFound = false;
+    const API_KEY="1e7a7835f074482139d752775addeb5e";
+    let actorFound = false;
 
-    for (let i = 1; i <= 18 && !movieFound; i++) 
+    for (let i = 1; i <= 18 && !actorFound; i++) 
     {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=es-ES&page=${i}`
+          `https://api.themoviedb.org/3/person/popular?api_key=${API_KEY}&language=es-ES&page=${i}`
         );
         const data = await response.json();
-        movieFound=data.results.find(movie=> 
-          slugify(movie.title).includes(slugify(query))
+        actorFound=data.results.find(actor=> 
+          slugify(actor.name).includes(slugify(query))
         );
-        if (movieFound) {
-          window.location.href = `/movies/${slugify(movieFound.title)}-${movieFound.id}`;
+        if (actorFound) {
+          window.location.href = `/actors/${slugify(actorFound.name)}-${actorFound.id}`;
         }
     } 
-    if (!movieFound) {
-      alert('No movies found with that title.');
+    if (!actorFound) {
+      alert('No actors found with that name.');
     }
   });
   
