@@ -168,7 +168,7 @@ main {
 }
 
 .header-catalog__title {
-  font-size: 3.5rem;
+  font-size: 1.5rem;
   text-align: center;
   margin: 0;
   background: linear-gradient(to right, var(--color-light), var(--color-accent));
@@ -176,7 +176,6 @@ main {
   -webkit-background-clip: text;
   color: transparent;
   font-weight: var(--font-weight-bold);
-  font-family: var(--font-main);
 }
 
 .header-catalog__search {
@@ -259,15 +258,17 @@ main {
 }
 
 /* Media Queries */
-@media (max-width: 720px) {
+@media (min-width: 600px) {
   .header-catalog__title {
     font-size: 2.5rem;
   }
 }
 
-@media (max-width: 420px) {
+@media (min-width: 1240px) {
   .header-catalog__title {
-    font-size: 1.5rem;
+    font-size: 3.5rem;
   }
 }
+
+
 </style>
