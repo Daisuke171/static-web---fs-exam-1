@@ -41,8 +41,8 @@ const actor = await response.json();
           class="actor__poster"
         />
         <div class="actor__popularity">
-          <span class="actor__popularity-value"
-            >{actor.popularity.toFixed(1)}</span
+          <div class="actor__popularity-value"
+            >{actor.popularity.toFixed(1)}</div
           >
           <span class="actor__popularity-max">/100</span>
         </div>
@@ -55,7 +55,6 @@ const actor = await response.json();
           {
             actor.birthday && (
               <div class="actor__birthday">
-                <span class="visually-hidden">Birthdate: </span>
                 <time datetime={actor.birthday}>
                   {new Date(actor.birthday).toLocaleDateString("es-ES", {
                     year: "numeric",
@@ -64,10 +63,7 @@ const actor = await response.json();
                   })}
                 </time>
                 {actor.deathday && (
-                  <span class="actor__deathday">
-                    <span class="visually-hidden">
-                      Deathday:
-                    </span>
+                  <div class="actor__deathday">
                     <time datetime={actor.deathday}>
                       {new Date(actor.deathday).toLocaleDateString("es-ES", {
                         year: "numeric",
@@ -75,7 +71,7 @@ const actor = await response.json();
                         day: "numeric",
                       })}
                     </time>
-                  </span>
+                  </div>
                 )}
               </div>
             )
@@ -83,7 +79,7 @@ const actor = await response.json();
           {
             actor.place_of_birth && (
               <div class="actor__place-of-birth">
-                <span class="visually-hidden">Place of birth: </span>
+                
                 {actor.place_of_birth}
               </div>
             )
@@ -129,7 +125,7 @@ const actor = await response.json();
     padding: 2rem;
     flex-grow: 1;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.5fr;
     gap: 3rem;
     align-items: center;
   }
@@ -182,11 +178,11 @@ const actor = await response.json();
 
   /* Información del actor */
   .actor__info {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-    padding-bottom: 5rem;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding-bottom: 5rem;
+}
 
   .actor__header {
     display: flex;
@@ -215,40 +211,34 @@ const actor = await response.json();
     font-weight: var(--font-weight-medium);
   }
 
-  .actor__biography {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    font-size: 1.1rem;
-    color: var(--color-text);
-    text-shadow: var(--gradient-dark);
-  }
+.actor__biography {
+  width: 100%;
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 1rem; 
+  position: relative;
+  color: var(--color-text);
+  text-shadow: var(--gradient-dark);
+}
 
   .actor__biography-text {
-    font-size: 1.2rem;
-    line-height: 1.7;
-    color: var(--color-text);
-    margin: 0;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 1.5rem;
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-  }
+  width: 100%;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  margin: 0;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1.5rem;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
 
   .actor__no-bio {
     font-style: italic;
     opacity: 0.8;
   }
 
-  .visually-hidden {
-    position: absolute;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
-  }
+  
   .footer {
     background: var(--color-dark);
     color: var(--color-light);
