@@ -1,9 +1,10 @@
 ---
-export const prerender = true; ///for server deploy
+export const prerender = true; ///for server
 
-import MainLayout from "../../layout/MainLayout.astro";
+// import MainLayout from "../../layout/MainLayout.astro";
 import ActorCard from "../../components/ActorCard.astro";
-import NavBar from "../../components/navBar.astro";
+// import NavBar from "../../components/navBar.astro";
+import CatalogueLayout from "../../layout/CatalogueLayout.astro";
 
 import type { GetStaticPaths } from "astro";
 import { slugify } from "../../utils/slugify";
@@ -41,19 +42,8 @@ interface Page {
 const { page } = Astro.props as { page: Page };
 ---
 
-<MainLayout title="Actor Catalogue">
-  <header class="header-catalog">
-  <NavBar />
 
-  <h1 class="header-catalog__title">Actor Catalogue</h1>
-    <input
-      type="text"
-      class="header-catalog__search"
-      placeholder="Search for an actor"
-    />
-    <button class="header-catalog__button">Search</button>
-  </header>
-
+<CatalogueLayout name="Actor Catalogue">
   <main>
     <div class="movies-container">
       {
@@ -103,8 +93,11 @@ const { page } = Astro.props as { page: Page };
       </span>
     </nav>
   </footer>
+</CatalogueLayout>
 
-</MainLayout>
+  
+
+
 
 <script>
   function slugify(title) {

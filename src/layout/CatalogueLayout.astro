@@ -1,0 +1,78 @@
+---
+import MainLayout from "./MainLayout.astro";
+import NavBar from "../components/navBar.astro";
+
+const { name } = Astro.props;
+---
+
+
+<MainLayout title={name}>
+  <header class="header-catalog">
+    <NavBar />
+    <h1 class="header-catalog__title">{name}</h1>
+    <input
+      type="text"
+      class="header-catalog__search"
+      placeholder="Search for a movie"
+    />
+    <button class="header-catalog__button">Search</button>
+  </header>
+
+  <slot />
+</MainLayout>
+
+<style>
+    .header-catalog {
+  padding-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  background: var(--gradient-primary);
+  color: var(--color-light);
+}
+
+.header-catalog__title {
+  font-size: 3.5rem;
+  text-align: center;
+  margin: 0;
+  background: linear-gradient(to right, var(--color-light), var(--color-accent));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-main);
+}
+
+.header-catalog__search {
+  width: 100%;
+  max-width: 350px;
+  padding: 0.8em;
+  font-size: 1.2rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.header-catalog__search::placeholder {
+  color: var(--color-light);
+  font-family: var(--font-main);
+  font-weight: var(--font-weight-regular);
+}
+
+.header-catalog__button {
+  width: fit-content;
+  padding: 0.7em 2em;
+  border-radius: 20px;
+  border: none;
+  background-color: var(--color-accent);
+  color: var(--color-dark);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+}
+
+.header-catalog__button:hover {
+  background-color: var(--color-light);
+}
+</style>
