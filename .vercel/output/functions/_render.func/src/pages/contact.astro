@@ -1,0 +1,209 @@
+---
+import MainLayout from '../layout/MainLayout.astro';
+---
+
+  <script>
+  
+  const form = document.querySelector("#contact-form");
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault(); 
+
+    const $name = document.querySelector('input[name="name"]').value;
+    const $lastName = document.querySelector('input[name="last-name"]').value;
+    const $email = document.querySelector('input[name="email"]').value;
+    const $number = document.querySelector('input[name="number"]').value;
+  
+
+    const datos = {
+      nombre: $name,
+      apellido: $lastName,
+      email: $email,
+      telefono: $number,
+     
+    };
+
+    console.log("Datos del formulario:", datos);
+  });
+  
+</script>
+
+
+<MainLayout title="Movie Zone">
+
+  <section class="contect-form">
+    <form class="contect-form__contact" id="contact-form" action="">
+
+      <h2 class="contect-form__title">Registro</h2>
+
+      <label class="contect-form__name"  for="nombre">Nombre</label>
+      <input class="contect-form__name-in" type="text" id="name" name="name" >
+
+      <label for="apellido" class="contect-form__name"  >Apellido</label>
+      <input  class="contect-form__name-in" type="text" id="apellido" name="last-name">
+     
+      <label for="email" class="contect-form__name" >Email</label>
+      <input  class="contect-form__name-in" type="email" id="email" name="email">
+
+      <label for="numero" class="contect-form__name"  >Numero de telefono</label>
+      <input  class="contect-form__name-in" type="number" id="numero" name="number">
+
+ 
+      
+      <button class="contect-form__button" type="submit" id="" name="boton">Enviar</button>
+    </form>
+  </section>
+
+   <footer class="footer">
+    <nav class="footer-nav">
+      <a href="main/Homepage" class="footer-nav__link"> Volver a pagina principal </a>
+    </nav>
+  </footer>
+
+
+</MainLayout>
+
+<style>
+
+body{
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-main);
+   background: var(--gradient-primary);
+   display: flex;
+   flex-direction: column;
+   justify-content:center;
+
+}
+
+.contect-form__title{
+  color:var(--color-accent);
+  text
+}
+.contect-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.contect-form__contact { 
+  background: white;
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  gap: 0.5rem;
+  padding:2rem;
+  border-radius: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.contect-form__name {
+  font-size: 1rem;
+  margin:auto;
+  width:350px;
+}
+
+.contect-form__name-in {
+    margin: auto;
+    width:350px;
+    padding: 0.3em;
+    font-size: 1.2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgb(191, 202, 198) ;
+}
+
+
+.contect-form__button{
+ width: fit-content;
+    padding: 0.7em 2em;
+    border-radius: 20px;
+    border: none;
+    background-color: var(--color-accent);
+    color: var(--color-dark);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    margin: auto;
+}
+
+
+  .footer {
+    background: var(--color-dark);
+    color: var(--color-light);
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid var(--color-primary);
+    position: fixed;
+    bottom: 0;
+    }
+
+  .footer-nav {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    font-family: var(--font-main);
+  }
+
+  .footer-nav__link {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: color 0.3s ease;
+  }
+
+  .footer-nav__link:hover {
+    color: var(--color-light);
+  }
+
+  @media (max-width:768px ){
+    .contect-form__contact { 
+  width: 350px;
+}
+
+.contect-form__name-in {
+
+    font-size: 1rem;
+   
+}
+
+  }
+
+  @media (max-width:420px){
+    .contect-form__contact { 
+  width: 300px;
+ }
+  
+.contect-form__name-in {
+    margin: auto;
+    width:300px;
+    font-size: 1rem;
+ 
+}
+   
+
+  .contect-form__name {
+  font-size: 1rem;
+  margin:auto;
+  width:300px;
+}
+
+.contect-form__button{
+ width: fit-content;
+    padding: 0.7em 1em;
+    border-radius: 20px;
+    border: none;
+    background-color: var(--color-accent);
+    color: var(--color-dark);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    margin: auto;
+}
+}
+  
+
+</style>

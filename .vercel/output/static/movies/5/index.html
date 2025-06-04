@@ -1,0 +1,885 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><link rel="icon" type="image/svg+xml" href="./public/favicon.svg"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Movie Catalogue</title><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CtSceO8m.js"></script><style>.astro-route-announcer{position:absolute;left:0;top:0;clip:rect(0 0 0 0);clip-path:inset(50%);overflow:hidden;white-space:nowrap;width:1px;height:1px}*,*:before,*:after{margin:0;padding:0;box-sizing:border-box;width:100%;max-width:100%}:root{--color-primary: oklch(.55 .25 275);--color-secondary: oklch(.65 .22 5);--color-accent: oklch(.7 .2 180);--color-dark: oklch(.25 .05 265);--color-light: oklch(.98 .01 100);--font-main: "Inter", system-ui, -apple-system, sans-serif;--font-weight-regular: 400;--font-weight-medium: 500;--font-weight-bold: 700;--background-color:oklch(.9117 .0642 68.69);--background-color-light:oklch(.8705 .0542 68.69);--gradient-primary: linear-gradient(120deg, var(--color-primary) 0%, var(--color-secondary) 100%);--gradient-card: linear-gradient(to bottom, oklch(.98 0 0 / 0) 50%, oklch(0 0 0 / .7) 100%);--gradient-dark: linear-gradient(to bottom, oklch(0 0 0 / .8) 0%, oklch(0 0 0 / .4) 100%);--gradient-glass: linear-gradient(135deg, oklch(.3 .02 270 / .6) 0%, oklch(.25 .03 265 / .8) 100%)}
+</style>
+<link rel="stylesheet" href="/_astro/_page_.Cj4jcmOC.css">
+<style>.favorites__header[data-astro-cid-35x3ascb]{background:#11110d87;padding:.1rem 0;color:#fff;font-weight:var(--font-weight-bold);font-family:var(--font-main)}.favorites__header[data-astro-cid-35x3ascb] nav[data-astro-cid-35x3ascb]{display:flex;flex-direction:row;margin:0 auto;padding:0 1rem;gap:1rem;flex-wrap:nowrap;justify-content:space-between}.favorites__header__left[data-astro-cid-35x3ascb],.favorites__header__center[data-astro-cid-35x3ascb],.favorites__header__right[data-astro-cid-35x3ascb]{display:flex;align-items:center;width:fit-content}.favorites__header__right--profileButton[data-astro-cid-35x3ascb] img[data-astro-cid-35x3ascb]{width:40px;height:40px;min-width:40px;min-height:40px;border-radius:50%}.favorites__header__left[data-astro-cid-35x3ascb]{gap:0}.favorites__header__left--logo[data-astro-cid-35x3ascb] img[data-astro-cid-35x3ascb]{width:200px;height:100px;position:relative;right:6rem}.favorites__header__left--menuButton[data-astro-cid-35x3ascb],.favorites__header__center--moviesButton[data-astro-cid-35x3ascb] a[data-astro-cid-35x3ascb],.favorites__header__center--actorsButton[data-astro-cid-35x3ascb] a[data-astro-cid-35x3ascb],.favorites__header__center--home[data-astro-cid-35x3ascb] a[data-astro-cid-35x3ascb],.favorites__header__right--searchButton[data-astro-cid-35x3ascb] i[data-astro-cid-35x3ascb]{color:#fff;text-decoration:none;margin-right:2rem;font-size:1.2rem;transition:color .2s}.favorites__header__left--menuButton[data-astro-cid-35x3ascb]{display:none;background:none;border:none;cursor:pointer}#nav-menu[data-astro-cid-35x3ascb]{display:flex;gap:1rem}@media (max-width: 768px){.favorites__header__left--menuButton[data-astro-cid-35x3ascb]{display:block}#nav-menu[data-astro-cid-35x3ascb]{display:none;flex-direction:column;position:absolute;top:70px;left:0;width:100%;background:#222;padding:1rem;z-index:999}#nav-menu[data-astro-cid-35x3ascb] a[data-astro-cid-35x3ascb]{margin:.5rem 0;color:#fff}#nav-menu[data-astro-cid-35x3ascb].is-hidden{display:none}#nav-menu[data-astro-cid-35x3ascb]:not(.is-hidden){display:flex}.favorites__header__left--logo[data-astro-cid-35x3ascb] img[data-astro-cid-35x3ascb]{position:relative;right:10rem;width:300px;height:100px}.favorites__header__left[data-astro-cid-35x3ascb]{position:relative;right:2.8rem}}@media (min-width: 780px){.favorites__header__center[data-astro-cid-35x3ascb]{display:flex!important;position:static;background:none;flex-direction:row;padding:0}.favorites__header__left--menuButton[data-astro-cid-35x3ascb]{display:none}}@media (min-width: 769px){#nav-menu[data-astro-cid-35x3ascb]{position:relative;right:3rem;gap:4rem}}@media (min-width: 1080px){#nav-menu[data-astro-cid-35x3ascb]{position:relative;right:4rem;gap:8rem}}
+</style></head> <body>  <header class="header-catalog" data-astro-cid-3e3nu26k> <script is:client>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtn = document.getElementById("menu-toggle");
+    const menu = document.getElementById("nav-menu");
+
+    if (toggleBtn && menu) {
+      toggleBtn.addEventListener("click", () => {
+        menu.classList.toggle("is-hidden");
+      });
+    }
+  });
+</script> <header class="favorites__header" data-astro-cid-35x3ascb> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <nav data-astro-cid-35x3ascb> <div class="favorites__header__left" data-astro-cid-35x3ascb> <button id="menu-toggle" class="favorites__header__left--menuButton" aria-label="Abrir menú" data-astro-cid-35x3ascb> <i class="fa fa-bars" data-astro-cid-35x3ascb></i> </button> <a href="" class="favorites__header__left--logo" data-astro-reload data-astro-cid-35x3ascb></a><a href="/main/Homepage" class="favorites__header__left--logo" data-astro-reload data-astro-cid-35x3ascb> <figure data-astro-cid-35x3ascb> <img src="/images/logo.png" alt="" data-astro-cid-35x3ascb> </figure> </a> </div> <div class="favorites__header__center is-hidden" id="nav-menu" data-astro-cid-35x3ascb> <div class="favorites__header__center--home" data-astro-cid-35x3ascb> <a href="/main/Homepage" data-astro-reload data-astro-cid-35x3ascb>Inicio</a> </div> <div class="favorites__header__center--moviesButton" data-astro-cid-35x3ascb> <a href="/movies/1" data-astro-reload data-astro-cid-35x3ascb>Peliculas</a> </div> <div class="favorites__header__center--actorsButton" data-astro-cid-35x3ascb> <a href="/actors/1" data-astro-reload data-astro-cid-35x3ascb>Actores</a> </div> </div> <div class="favorites__header__right" data-astro-cid-35x3ascb> <div class="favorites__header__right--searchButton" data-astro-cid-35x3ascb> <a href="" class="favorites__header__right--searchButton" data-astro-reload data-astro-cid-35x3ascb> <i class="fa fa-search" data-astro-cid-35x3ascb></i> </a> </div> <div class="favorites__header__right--profileButton" data-astro-cid-35x3ascb> <a href="../user" class="favorites__header__right--profileButton" data-astro-reload data-astro-cid-35x3ascb> <figure data-astro-cid-35x3ascb> <img src="/images/placegolderAvatar.png" alt="" data-astro-cid-35x3ascb> </figure> </a> </div> </div> </nav> </header>  <h1 class="header-catalog__title" data-astro-cid-3e3nu26k>Movie Catalogue</h1> <input type="text" class="header-catalog__search" placeholder="Search for a movie" data-astro-cid-3e3nu26k> <button class="header-catalog__button" data-astro-cid-3e3nu26k>Search</button> </header> <main data-astro-cid-3e3nu26k> <div class="movies-container" data-astro-cid-3e3nu26k> <div class="movie-item" data-slug="van-gogh-by-vincent-1471014" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/z73X4WKZghBh5fri31o8P6vBEB2.jpg" alt="Póster de Van Gogh by Vincent" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-1471014" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-1471014" data-id="1471014" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 5.9</span> <a href="/movies/van-gogh-by-vincent-1471014" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/van-gogh-by-vincent-1471014" data-astro-cid-y6otcn7o>Van Gogh by Vincent</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="leroy-y-stitch-21316" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/8ddTcTllI5U1Gq2EvGYE2CBprOS.jpg" alt="Póster de Leroy y Stitch" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-21316" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-21316" data-id="21316" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 6.6</span> <a href="/movies/leroy-y-stitch-21316" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/leroy-y-stitch-21316" data-astro-cid-y6otcn7o>Leroy y Stitch</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="pídeme-lo-que-quieras-1252309" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/5rtaLwyKAjbceww4J1ro8aA8BNB.jpg" alt="Póster de Pídeme lo que quieras" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-1252309" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-1252309" data-id="1252309" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 6.2</span> <a href="/movies/pídeme-lo-que-quieras-1252309" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/pídeme-lo-que-quieras-1252309" data-astro-cid-y6otcn7o>Pídeme lo que quieras</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="woodwalkers-1241894" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/n84V8SLmc7242ltKRePD5uvP8Xb.jpg" alt="Póster de Woodwalkers" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-1241894" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-1241894" data-id="1241894" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 6.1</span> <a href="/movies/woodwalkers-1241894" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/woodwalkers-1241894" data-astro-cid-y6otcn7o>Woodwalkers</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="viuda-negra-497698" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/iKntUTTLxUgizTe3jFcGLuHc84c.jpg" alt="Póster de Viuda negra" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-497698" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-497698" data-id="497698" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 7.2</span> <a href="/movies/viuda-negra-497698" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/viuda-negra-497698" data-astro-cid-y6otcn7o>Viuda negra</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="culpa-mía:-londres-1294203" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/q0HxfkF9eoa6wSVnzwMhuDSK7ba.jpg" alt="Póster de Culpa mía: Londres" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-1294203" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-1294203" data-id="1294203" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 7.4</span> <a href="/movies/culpa-mía:-londres-1294203" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/culpa-mía:-londres-1294203" data-astro-cid-y6otcn7o>Culpa mía: Londres</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="fin-de-fiesta-1321017" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/jqfTVbZ23Uv9hV2bu6dth13bHnS.jpg" alt="Póster de Fin de fiesta" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-1321017" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-1321017" data-id="1321017" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 6.0</span> <a href="/movies/fin-de-fiesta-1321017" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/fin-de-fiesta-1321017" data-astro-cid-y6otcn7o>Fin de fiesta</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="la-casa-al-final-de-la-curva-1244890" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/e5u5w6gemV0aCyczA1YvKan8510.jpg" alt="Póster de La casa al final de la curva" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-1244890" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-1244890" data-id="1244890" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 6.1</span> <a href="/movies/la-casa-al-final-de-la-curva-1244890" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/la-casa-al-final-de-la-curva-1244890" data-astro-cid-y6otcn7o>La casa al final de la curva</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="el-padrino-238" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/5HlLUsmsv60cZVTzVns9ICZD6zU.jpg" alt="Póster de El padrino" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-238" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-238" data-id="238" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 8.7</span> <a href="/movies/el-padrino-238" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/el-padrino-238" data-astro-cid-y6otcn7o>El padrino</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="destino-final-2-9358" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/w1dJluO5aKK7Puz7qNXoQeUh4Cb.jpg" alt="Póster de Destino final 2" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-9358" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-9358" data-id="9358" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 6.3</span> <a href="/movies/destino-final-2-9358" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/destino-final-2-9358" data-astro-cid-y6otcn7o>Destino final 2</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="la-mujer-de-las-sombras-1244944" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/3hcfxkII892XuzoSW0JvdE68JAq.jpg" alt="Póster de La mujer de las sombras" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-1244944" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-1244944" data-id="1244944" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 6.2</span> <a href="/movies/la-mujer-de-las-sombras-1244944" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/la-mujer-de-las-sombras-1244944" data-astro-cid-y6otcn7o>La mujer de las sombras</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="cómo-entrenar-a-tu-dragón-10191" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/xyxSgO8rA2H4IcQfEoy2DJDDyrQ.jpg" alt="Póster de Cómo entrenar a tu dragón" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-10191" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-10191" data-id="10191" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 7.8</span> <a href="/movies/cómo-entrenar-a-tu-dragón-10191" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/cómo-entrenar-a-tu-dragón-10191" data-astro-cid-y6otcn7o>Cómo entrenar a tu dragón</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="door-405746" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/rmD3Q8wPrzbe5P5gDgbzR0fsDQx.jpg" alt="Póster de DOOR" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-405746" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-405746" data-id="405746" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 6.5</span> <a href="/movies/door-405746" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/door-405746" data-astro-cid-y6otcn7o>DOOR</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="oni-goroshi:-ciudad-de-los-demonios-1405338" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/cU6InMc8NYc54Ok4NnNHdjipqCQ.jpg" alt="Póster de Oni-Goroshi: Ciudad de los demonios" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-1405338" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-1405338" data-id="1405338" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 7.0</span> <a href="/movies/oni-goroshi:-ciudad-de-los-demonios-1405338" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/oni-goroshi:-ciudad-de-los-demonios-1405338" data-astro-cid-y6otcn7o>Oni-Goroshi: Ciudad de los demonios</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="corazones-rotos-959604" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/qaDDFibgdo3zJxoHb1pKLVNnciV.jpg" alt="Póster de Corazones rotos" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-959604" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-959604" data-id="959604" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 7.2</span> <a href="/movies/corazones-rotos-959604" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/corazones-rotos-959604" data-astro-cid-y6otcn7o>Corazones rotos</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="panda-plan-1160956" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/sul3eKDF9rb0wn2Q9wFfv61lOGi.jpg" alt="Póster de Panda Plan" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-1160956" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-1160956" data-id="1160956" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 6.9</span> <a href="/movies/panda-plan-1160956" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/panda-plan-1160956" data-astro-cid-y6otcn7o>Panda Plan</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="la-trama-fenicia-1137350" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/rSjhapG9pfcJjKogZQPICHW0GwU.jpg" alt="Póster de La trama fenicia" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-1137350" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-1137350" data-id="1137350" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 6.9</span> <a href="/movies/la-trama-fenicia-1137350" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/la-trama-fenicia-1137350" data-astro-cid-y6otcn7o>La trama fenicia</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="los-vengadores-24428" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/ugX4WZJO3jEvTOerctAWJLinujo.jpg" alt="Póster de Los Vengadores" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-24428" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-24428" data-id="24428" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 7.8</span> <a href="/movies/los-vengadores-24428" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/los-vengadores-24428" data-astro-cid-y6otcn7o>Los Vengadores</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="misión:-imposible---fallout-353081" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/6fSdqrkkhSHi2hD6WFTi2LF43Al.jpg" alt="Póster de Misión: Imposible - Fallout" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-353081" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-353081" data-id="353081" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 7.4</span> <a href="/movies/misión:-imposible---fallout-353081" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/misión:-imposible---fallout-353081" data-astro-cid-y6otcn7o>Misión: Imposible - Fallout</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="la-película-de-stitch-15567" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/6MM0i4SrOPQblYSRS8jrOgZ4mlw.jpg" alt="Póster de La película de Stitch" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-15567" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-15567" data-id="15567" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 6.4</span> <a href="/movies/la-película-de-stitch-15567" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/la-película-de-stitch-15567" data-astro-cid-y6otcn7o>La película de Stitch</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="destino-final-3-9286" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/3PEVkIBOii1fxQxaQ0iKODGnBUp.jpg" alt="Póster de Destino final 3" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-9286" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-9286" data-id="9286" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 6.1</span> <a href="/movies/destino-final-3-9286" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/destino-final-3-9286" data-astro-cid-y6otcn7o>Destino final 3</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="zoe,-mi-amiga-muerta-1128505" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/z9W67Vj2awbDPABNGBzYzwTI1N7.jpg" alt="Póster de Zoe, mi amiga muerta" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-1128505" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-1128505" data-id="1128505" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 6.5</span> <a href="/movies/zoe,-mi-amiga-muerta-1128505" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/zoe,-mi-amiga-muerta-1128505" data-astro-cid-y6otcn7o>Zoe, mi amiga muerta</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="alien:-romulus-945961" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/8PYqGSd8MOm5ce8io4qNSAiSExW.jpg" alt="Póster de Alien: Romulus" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-945961" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-945961" data-id="945961" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 7.2</span> <a href="/movies/alien:-romulus-945961" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/alien:-romulus-945961" data-astro-cid-y6otcn7o>Alien: Romulus</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div><div class="movie-item" data-slug="gunslingers-1293286" data-astro-cid-3e3nu26k> <article class="movie-card" data-astro-cid-y6otcn7o> <div class="movie-card__image-container" data-astro-cid-y6otcn7o> <img src="https://image.tmdb.org/t/p/w500/O7REXWPANWXvX2jhQydHjAq2DV.jpg" alt="Póster de Gunslingers" class="movie-card__image" data-astro-cid-y6otcn7o> <div class="movie-card__image-container__favBtn" data-astro-cid-y6otcn7o> <div class="container" data-astro-cid-y6otcn7o> <label for="checkbox-1293286" data-astro-cid-y6otcn7o> <div class="label" data-astro-cid-y6otcn7o> <input type="checkbox" id="checkbox-1293286" data-id="1293286" data-astro-cid-y6otcn7o> <div class="heart" data-astro-cid-y6otcn7o> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> <svg viewBox="0 0 544.582 544.582" data-astro-cid-y6otcn7o> <path d="M448.069,57.839c-72.675-23.562-150.781,15.759-175.721,87.898C247.41,73.522,169.303,34.277,96.628,57.839
+                C23.111,81.784-16.975,160.885,6.894,234.708c22.95,70.38,235.773,258.876,263.006,258.876
+                c27.234,0,244.801-188.267,267.751-258.876C561.595,160.732,521.509,81.631,448.069,57.839z" data-astro-cid-y6otcn7o></path></svg> </div> </div> </label> </div> </div> <div class="movie-card__overlay" data-astro-cid-y6otcn7o> <span class="movie-card__rating" data-astro-cid-y6otcn7o>⭐ 6.5</span> <a href="/movies/gunslingers-1293286" class="movie-card__link" data-astro-reload data-astro-cid-y6otcn7o>Ver detalles</a> </div> </div> <h3 class="movie-card__title" data-astro-cid-y6otcn7o> <a href="/movies/gunslingers-1293286" data-astro-cid-y6otcn7o>Gunslingers</a> </h3> </article>  <script type="module">
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    checkboxes.forEach((checkbox) => {
+      const id = parseInt(checkbox.dataset.id);
+
+      // Cargar estado guardado
+      if (savedFavorites.includes(id)) {
+        checkbox.checked = true;
+      }
+
+      // Ver cambios
+      checkbox.addEventListener('change', () => {
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        if (checkbox.checked) {
+          if (!favorites.includes(id)) {
+            favorites.push(id);
+          }
+        } else {
+          favorites = favorites.filter(favId => favId !== id);
+        }
+
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        console.log("Cargando favoritos:", savedFavorites);
+      });
+    });
+  });
+
+  
+</script> </div> </div> </main> <footer class="footer" data-astro-cid-3e3nu26k> <nav class="footer-nav" data-astro-cid-3e3nu26k> <a href="/movies/1" class="footer-nav__link" data-astro-reload data-astro-cid-3e3nu26k>Inicio</a> <a href="/movies/4" class="footer-nav__link" data-astro-reload data-astro-cid-3e3nu26k>
+Anterior
+</a> <a href="/movies/6" class="footer-nav__link" data-astro-reload data-astro-cid-3e3nu26k>
+Siguiente
+</a> <span class="footer-nav__info" data-astro-cid-3e3nu26k>
+Página 5 de 15 </span> </nav> </footer>  </body></html> <script type="module">function o(t){return t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^\w\s-]/g,"").replace(/\s+/g,"-").replace(/--+/g,"-").trim()}const n=document.querySelector(".header-catalog__button"),c=document.querySelector(".header-catalog__search");n.addEventListener("click",async()=>{const t=c.value.trim();if(!t){alert("Please enter a movie title to search.");return}const r="26556575658af780cf7d1cdfa28bc314";let e=!1;for(let a=1;a<=18&&!e;a++)if(e=(await(await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${r}&language=es-ES&page=${a}`)).json()).results.find(i=>o(i.title).includes(o(t))),e){window.location.href=`/movies/${o(e.title)}-${e.id}`;return}alert("No movies found with that title.")});</script> 
