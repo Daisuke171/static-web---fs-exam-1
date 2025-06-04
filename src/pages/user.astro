@@ -22,11 +22,14 @@ import { ClientRouter } from "astro:transitions";
   </header>
   
   <main>
-    <h1 class="userProfile__favoritesTitle">Tus favoritos</h1>
+    <h1 class="userProfile__favoritesTitle">Tus Peliculas Favoritas</h1>
     <div id="favorites-container" class="movies-container" ></div>
+    <h1 class="userProfile__favoritesTitle">Tus Actores Favoritos</h1>
+    <div id="favorites-container-actors" class="movies-container" ></div>
   </main>
 
   <script type="module" src="/scripts/renderFavorites.js"></script>
+  <script type="module" src="/scripts/renderFavActors.js"></script>
 
 </MainLayout>
 

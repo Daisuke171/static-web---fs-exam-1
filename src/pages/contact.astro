@@ -2,28 +2,55 @@
 import MainLayout from '../layout/MainLayout.astro';
 ---
 
+  <script>
+  
+  
+  const form = document.querySelector("#contact-form");
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault(); 
+
+    const $name = document.querySelector('input[name="name"]').value;
+    const $lastName = document.querySelector('input[name="last-name"]').value;
+    const $email = document.querySelector('input[name="email"]').value;
+    const $number = document.querySelector('input[name="number"]').value;
+  
+
+    const datos = {
+      nombre: $name,
+      apellido: $lastName,
+      email: $email,
+      telefono: $number,
+     
+    };
+
+    console.log("Datos del formulario:", datos);
+  });
+</script>
+
+
 <MainLayout title="Movie Zone">
 
   <section class="contect-form">
-    <form class="contect-form__contact" action="">
-      <h2 class="contect-form__title">Formulario de contacto</h2>
+    <form class="contect-form__contact" id="contact-form" action="">
+
+      <h2 class="contect-form__title">Registro</h2>
+
       <label class="contect-form__name"  for="nombre">Nombre</label>
-      <input class="contect-form__name-in" type="text" id="nombre" name="nombre" >
+      <input class="contect-form__name-in" type="text" id="name" name="name" >
 
       <label for="apellido" class="contect-form__name"  >Apellido</label>
-      <input  class="contect-form__name-in" type="text" id="apellido" name="apellido">
+      <input  class="contect-form__name-in" type="text" id="apellido" name="last-name">
      
-      <label for="email" class="contect-form__name"  >Email</label>
+      <label for="email" class="contect-form__name" >Email</label>
       <input  class="contect-form__name-in" type="email" id="email" name="email">
 
       <label for="numero" class="contect-form__name"  >Numero de telefono</label>
-      <input  class="contect-form__name-in" type="number" id="numero" name="numero">
+      <input  class="contect-form__name-in" type="number" id="numero" name="number">
 
-      <label for="numero" class="contect-form__name"  > Asunton </label>
-      <input  class="contect-form__name-in" type="text" id="numero" name="numero">
  
       
-      <button class="contect-form__button" type="submit">Enviar</button>
+      <button class="contect-form__button" type="submit" id="" name="boton">Enviar</button>
     </form>
   </section>
 
@@ -49,7 +76,8 @@ body{
 }
 
 .contect-form__title{
-  color:var(--color-accent);;
+  color:var(--color-accent);
+  text
 }
 .contect-form {
   width: 100%;
@@ -61,7 +89,7 @@ body{
   background: white;
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 35%;
   gap: 0.5rem;
   padding:2rem;
   border-radius: 2rem;
@@ -135,28 +163,33 @@ body{
     .contect-form__contact { 
   width: 350px;
 }
+
+.contect-form__name-in {
+
+    font-size: 1rem;
+   
+}
+
   }
 
-  @media (max-width:420px ){
+  @media (max-width:420px){
     .contect-form__contact { 
   width: 300px;
-   }
+ }
+  
+.contect-form__name-in {
+    margin: auto;
+    width:300px;
+    font-size: 1rem;
+ 
+}
+   
+
   .contect-form__name {
   font-size: 1rem;
   margin:auto;
   width:300px;
 }
-
-.contect-form__name-in {
-    margin: auto;
-    width:300px;
-    padding: 0.2em;
-    font-size: 1.2rem;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    background: rgb(191, 202, 198) ;
-}
-
 
 .contect-form__button{
  width: fit-content;
@@ -171,6 +204,6 @@ body{
     margin: auto;
 }
 }
-  }
+  
 
 </style>

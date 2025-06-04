@@ -1,37 +1,37 @@
 ---
 import MainLayout from "../../layout/MainLayout.astro";
-import MovieCard from "../../components/MovieCard.astro";
+import ActorCard from "../../components/ActorCard.astro";
 import NavBar from "../../components/navBar.astro";
 
 import type { GetStaticPaths } from "astro";
 import { slugify } from "../../utils/slugify";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
-  const API_KEY = "26556575658af780cf7d1cdfa28bc314";
+  const API_KEY = "1e7a7835f074482139d752775addeb5e";
   const pageCount = 18;
   const pageSize = 24;
-  const movies = [];
+  const actors = [];
 
   for (let i = 1; i <= pageCount; i++) {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=es-ES&page=${i}`,
+      `https://api.themoviedb.org/3/person/popular?api_key=${API_KEY}&language=es-ES&page=${i}`,
     );
     const data = await response.json();
-    movies.push(...data.results);
+    actors.push(...data.results);
   }
 
-  return paginate(movies, { pageSize });
+  return paginate(actors, { pageSize });
 };
 
-interface Movie {
-  poster_path: string;
-  title: string;
-  vote_average: number;
+interface actors {
+  profile_path: string;
+  name: string;
+  popularity: number;
   id: number;
 }
 
 interface Page {
-  data: Movie[];
+  data: actors[];
   currentPage: number;
   lastPage: number;
 }
@@ -39,36 +39,36 @@ interface Page {
 const { page } = Astro.props as { page: Page };
 ---
 
-<MainLayout title="Movie Catalogue">
+<MainLayout title="Actor Catalogue">
   <header class="header-catalog">
-
   <NavBar />
 
-    <h1 class="header-catalog__title">Movie Catalogue</h1>
+  <h1 class="header-catalog__title">Actor Catalogue</h1>
     <input
       type="text"
       class="header-catalog__search"
-      placeholder="Search for a movie"
+      placeholder="Search for an actor"
     />
     <button class="header-catalog__button">Search</button>
   </header>
+
   <main>
     <div class="movies-container">
       {
         page.data.map(
-          (movie: {
-            poster_path: string;
-            title: string;
-            vote_average: number;
+          (actors: {
+            profile_path: string;
+            name: string;
+            popularity: number;
             id: number;
           }) => (
-            <div class="movie-item" data-slug={`${slugify(movie.title)}-${movie.id}`}>
-              <MovieCard
-                img={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                title={movie.title}
-                vote_average={movie.vote_average}
-                id={movie.id}
-                slug={`${slugify(movie.title)}-${movie.id}`}
+            <div class="actor-item" data-slug={`${slugify(actors.name)}-${actors.id}`}>
+              <ActorCard
+                img={`https://image.tmdb.org/t/p/w500${actors.profile_path}`}
+                title={actors.name}
+                vote_average={actors.popularity}
+                id={actors.id}
+                slug={`${slugify(actors.name)}-${actors.id}`}
               />
             </div>
           ),
@@ -76,13 +76,14 @@ const { page } = Astro.props as { page: Page };
       }
     </div>
   </main>
+
   <footer class="footer">
     <nav class="footer-nav">
-      <a href="/movies/1" class="footer-nav__link" data-astro-reload>Inicio</a>
+      <a href="/actors/1" class="footer-nav__link">Inicio</a>
       {
         page.currentPage > 1 && 
         (
-          <a href={`/movies/${page.currentPage - 1}`} class="footer-nav__link">
+          <a href={`/actors/${page.currentPage - 1}`} class="footer-nav__link">
             Anterior
           </a>
         )
@@ -90,7 +91,7 @@ const { page } = Astro.props as { page: Page };
       {
         page.currentPage < page.lastPage &&
         (
-          <a href={`/movies/${page.currentPage + 1}`} class="footer-nav__link">
+          <a href={`/actors/${page.currentPage + 1}`} class="footer-nav__link">
             Siguiente
           </a>
         )
@@ -142,13 +143,13 @@ const { page } = Astro.props as { page: Page };
       alert('No movies found with that title.');
     }
   });
-        
+  
 
 </script>
 
 
-<style>
 
+<style>
   .header-catalog {
     padding-bottom: 3rem;
     display: flex;
@@ -159,24 +160,7 @@ const { page } = Astro.props as { page: Page };
     color: var(--color-light);  
  
     color: var(--color-light);
-
   }
-
-  main {
-    flex: 1;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .header-catalog {
-   padding-bottom: 3rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  align-items: center;
-  background: var(--gradient-primary);
-  color: var(--color-light);
-}
 
   .header-catalog__title {
     font-size: 3.5rem;
@@ -229,7 +213,6 @@ const { page } = Astro.props as { page: Page };
     border: 1px solid rgba(255, 255, 255, 0.4);
     background-color: rgba(255, 255, 255, 0.1);
   }
-
   .header-catalog__search::placeholder {
     color: var(--color-light);
     font-family: var(--font-main);
@@ -247,13 +230,12 @@ const { page } = Astro.props as { page: Page };
     transition: all 0.3s ease;
     font-size: 1.1rem;
   }
-
   .header-catalog__button:hover {
     background-color: var(--color-light);
   }
 
   .movies-container {
-  background-color: var(--color-dark);
+   background-color: var(--color-dark);
   padding: 2rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -263,8 +245,7 @@ const { page } = Astro.props as { page: Page };
   box-sizing: border-box;
   max-width: 1600px;
   margin: 0 auto; 
-}
-
+  }
 
   .footer {
     background: var(--color-dark);
@@ -299,20 +280,4 @@ const { page } = Astro.props as { page: Page };
     font-weight: var(--font-weight-regular);
     color: var(--color-light);
   }
-
-  @media (max-width: 720px){
-    .header-catalog__title {
-    font-size: 2.5rem;
-    text-align: center;
-    margin: 0;
-  }
-
-   @media (max-width: 420px){
-    .header-catalog__title {
-    font-size: 1.5rem;
-    text-align: center;
-    margin: 0;
-  }
-
 </style>
-
