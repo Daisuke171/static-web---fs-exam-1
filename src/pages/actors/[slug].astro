@@ -1,4 +1,3 @@
-
 ---
 import MainLayout from "../../layout/MainLayout.astro";
 import type { GetStaticPaths } from "astro";
@@ -56,7 +55,7 @@ const actor = await response.json();
           {
             actor.birthday && (
               <div class="actor__birthday">
-                <span class="visually-hidden">Fecha de nacimiento: </span>
+                <span class="visually-hidden">Birthdate: </span>
                 <time datetime={actor.birthday}>
                   {new Date(actor.birthday).toLocaleDateString("es-ES", {
                     year: "numeric",
@@ -67,7 +66,7 @@ const actor = await response.json();
                 {actor.deathday && (
                   <span class="actor__deathday">
                     <span class="visually-hidden">
-                      Fecha de fallecimiento:{" "}
+                      Deathday:
                     </span>
                     <time datetime={actor.deathday}>
                       {new Date(actor.deathday).toLocaleDateString("es-ES", {
@@ -84,20 +83,20 @@ const actor = await response.json();
           {
             actor.place_of_birth && (
               <div class="actor__place-of-birth">
-                <span class="visually-hidden">Lugar de nacimiento: </span>
+                <span class="visually-hidden">Place of birth: </span>
                 {actor.place_of_birth}
               </div>
             )
           }
         </header>
         <section class="actor__biography">
-          <h2 class="actor__biography-title">Biografía</h2>
+          <h2 class="actor__biography-title">Biography</h2>
           <div class="actor__biography-text">
             {
               actor.biography ? (
                 <p>{actor.biography}</p>
               ) : (
-                <p class="actor__no-bio">No hay biografía disponible.</p>
+                <p class="actor__no-bio">No biography available.</p>
               )
             }
           </div>
@@ -111,65 +110,50 @@ const actor = await response.json();
     </nav>
   </footer>
 </MainLayout>
-  
 
 <style>
-  :root {
-    --color-primary: oklch(0.55 0.22 275);       /* Azul brillante*/
-    --color-secondary: oklch(0.3667 0.013 277.41);        /* Rosa suave */
-    --color-accent: oklch(0.65 0.2 180);         /* Cian brillante */
-    --color-dark: oklch(0.25 0.02 265);          /* Azul oscuro sofisticado */
-    --color-light: oklch(0.98 0.01 100);         /* Blanco puro */
-    --color-text: oklch(1 0 277.41);          /* Texto principal */
-    --color-text-secondary: oklch(0.8 0.01 100); /* Texto secundario */
-    
-  }
-
-
-  .movie {
-    position: relative;
+  .actor {
     min-height: 100vh;
     color: var(--color-text);
     font-family: var(--font-main);
+    display: flex;
+    flex-direction: column;
+    background: oklch(0.93 0.03 100);
+  }
+
+  /* Contenido principal */
+  .actor__content {
+    max-width: 1080px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
     align-items: center;
   }
 
-
-  /* Contenido principal */
-  .movie__content {
-    position: relative;
-    width: 100%;
-    padding: 10rem 4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: flex-end;
-    background: var(--gradient-primary);
-    color: var(--color-light);  
-    color: var(--color-light);
-  }
-
-  /* Póster de la película */
-  .movie__poster-wrapper {
+  /* Póster del actor */
+  .actor__poster-wrapper {
     width: 100%;
     max-width: 400px;
     position: relative;
     border-radius: 15px;
     overflow: hidden;
-
   }
-  .movie__poster-wrapper:hover {
+  .actor__poster-wrapper:hover {
     transform: translateY(-10px) scale(1.02);
   }
 
-  .movie__poster {
+  .actor__poster {
     width: 100%;
     display: block;
     aspect-ratio: 2/3;
     object-fit: cover;
   }
 
- .movie__rating {
-    
+  .actor__popularity {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -181,35 +165,36 @@ const actor = await response.json();
     background: var(--gradient-glass);
     backdrop-filter: blur(10px);
   }
-  .movie__rating-value {
+  .actor__popularity-value {
     font-size: 2.6rem;
     font-weight: var(--font-weight-bold);
     color: var(--color-accent);
     text-shadow: var(--gradient-dark);
   }
-  .movie__rating-max {
-    font-size: 1.2rem;
-    color: var(--color-text);
-    opacity:0.6;
+  .actor__popularity-max {
+    font-size: 1.6rem;
+    color: var(--color-light);
+    opacity: 0.6;
     align-self: flex-end;
     text-shadow: var(--gradient-dark);
+    font-weight: var(--font-weight-medium);
   }
 
-  /* Información de la película */
-  .movie__info{
+  /* Información del actor */
+  .actor__info {
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
     padding-bottom: 5rem;
   }
 
-  .movie__header {
+  .actor__header {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
 
-  .movie__title{
+  .actor__name {
     font-size: 3rem;
     font-weight: var(--font-weight-bold);
     color: var(--color-text);
@@ -218,7 +203,19 @@ const actor = await response.json();
     text-shadow: var(--gradient-dark);
   }
 
-  .movie__meta {
+  .actor__birthday,
+  .actor__deathday,
+  .actor__place-of-birth {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 1.1rem;
+    color: var(--color-text);
+    text-shadow: var(--gradient-dark);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .actor__biography {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -227,48 +224,10 @@ const actor = await response.json();
     text-shadow: var(--gradient-dark);
   }
 
-  .movie__release-date,
-  .movie__runtime {
-    font-weight: var(--font-weight-medium);
-    padding: 0.5rem 1rem;
-  }
-
-  .movie__genres {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    gap: 0.5rem;
-    padding: 0;
-    margin:0;
-  }
-
-  .movie__genre{
-    background: linear-gradient(120deg,var(--color-accent ), var(--color-light));
-    color: var(--color-text);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-weight: var(--font-weight-medium);
-    font-size: 0.9rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  }
-
-  .movie__overview {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    
-  }
-  .movie__overview-title {
-    font-size: 2rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--color-text);
-    margin: 0;
-    text-shadow: var(--gradient-dark);
-  }
-  .movie__overview-text {
+  .actor__biography-text {
     font-size: 1.2rem;
     line-height: 1.7;
-    color:var(--color-text);
+    color: var(--color-text);
     margin: 0;
     background: rgba(0, 0, 0, 0.2);
     padding: 1.5rem;
@@ -276,34 +235,48 @@ const actor = await response.json();
     backdrop-filter: blur(10px);
   }
 
+  .actor__no-bio {
+    font-style: italic;
+    opacity: 0.8;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
   .footer {
-  background: var(--color-dark);
-  color: var(--color-light);
-  padding: 2rem 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top: 2px solid var(--color-primary);
-}
+    background: var(--color-dark);
+    color: var(--color-light);
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid var(--color-primary);
+    margin-top: auto; 
+  }
 
-.footer-nav {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-  font-family: var(--font-main);
-}
+  .footer-nav {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    font-family: var(--font-main);
+  }
 
-.footer-nav__link {
-  color: var(--color-accent);
-  text-decoration: none;
-  font-weight: var(--font-weight-medium);
-  transition: color 0.3s ease;
-  font-size: 1.5rem;
-  text-align: center;
-}
+  .footer-nav__link {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: color 0.3s ease;
+    font-size: 1.5rem;
+    text-align: center;
+  }
 
-.footer-nav__link:hover {
-  color: var(--color-light);
-}
-
+  .footer-nav__link:hover {
+    color: var(--color-light);
+  }
 </style>
