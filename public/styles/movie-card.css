@@ -162,3 +162,16 @@ input:checked + .heart svg:nth-child(2) {
   }
 }
 
+@media screen and (max-width: 380px) {
+  #favorites-container, #favorites-container-actors{
+    background-color: var(--color-dark);
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); 
+    gap: 2rem;
+    justify-items: center;
+  }
+ }
+
+
+

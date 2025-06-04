@@ -33,6 +33,11 @@ import { ClientRouter } from "astro:transitions";
 </MainLayout>
 
 <style>
+html {
+  background-color: var(--color-dark);
+  height: 100svh;
+}
+
     .userProfile__header {
     padding-bottom: 3rem;
     display: flexblox;
@@ -67,7 +72,11 @@ import { ClientRouter } from "astro:transitions";
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    .userProfile__title {
+   main {
+    width: 100%;
+   }
+
+   .userProfile__title {
     font-size: 3.5rem;
     text-align: center;
     margin: 0;
@@ -80,14 +89,8 @@ import { ClientRouter } from "astro:transitions";
     top: 1.25rem;
     }
 
-
-   main {
-    width: 100%;
-    height: 2000px;
-    background-color: var(--color-dark);
-   }
-
    .userProfile__favoritesTitle{
+    width: fit-content;
     font-size: 2.75rem;
     top: 2rem;
     color: aliceblue;
@@ -97,9 +100,28 @@ import { ClientRouter } from "astro:transitions";
     padding-left: 2rem;
     padding-top: 2.5rem;
     text-align: center;
-}    
+  }    
 
+@media screen and (max-width: 380px) {
+  .userAvatar > img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 2px solid var(--color-accent);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
 
+  .userProfile__title{
+    font-size: 2.5rem;
+  }
+
+  .userProfile__favoritesTitle{
+    font-size: 1.8rem;
+    left: 1.2rem;
+  }
+  
+}
 
 
 </style>
