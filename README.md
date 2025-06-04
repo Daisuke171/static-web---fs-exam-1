@@ -18,7 +18,7 @@ All commands are run from the root of the project, from a terminal:
 
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Intala dependencias                            |
+| `pnpm install`             | Instala dependencias                            |
 | `pnpm dev`             | Inicia servidor local en `localhost:4321`      |
 | `pnpm build`           | Construye el sitio para produccion en `./dist/`          |
 | `pnpm preview`         | Previsualice su compilación localmente, antes de desplegarla     |
