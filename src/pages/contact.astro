@@ -2,7 +2,7 @@
 import MainLayout from '../layout/MainLayout.astro';
 ---
 
-  <script type="module" is:inline>
+<script type="module" is:inline>
   document.addEventListener('DOMContentLoaded', () => {
     const $form = document.querySelector("#contact-form");
     const $inputs = $form.querySelectorAll("input");
@@ -30,7 +30,7 @@ import MainLayout from '../layout/MainLayout.astro';
         $errorMsg.style.display = "none";
 
         const datos = Object.fromEntries(
-          Array.from(inputs).map(input => [input.name, input.value])
+          Array.from($inputs).map(input => [input.name, input.value])
         );
 
         console.log("Datos del formulario:", datos);
@@ -40,9 +40,6 @@ import MainLayout from '../layout/MainLayout.astro';
 </script>
 
     
-    
-
-</script>
 
 
 
