@@ -58,72 +58,71 @@
 </header>
 
 <style>
+  
   .favorites__header {
-  background: oklch(0.1751 0.0074 103 / 53.1%);
-  padding: 0.1rem 0;
-  color: #fff;
-  font-weight: var(--font-weight-bold);
-  font-family: var(--font-main);
-}
+    background: oklch(0.1751 0.0074 103 / 53.1%);
+    padding: 0.1rem 0;
+    color: #fff;
+    font-weight: var(--font-weight-bold);
+    font-family: var(--font-main);
+  }
 
-.favorites__header nav {
-  display: flex;
-  flex-direction:row; /* En columna en móvil */
-  padding: 0 1rem;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-}
+  .favorites__header nav {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    padding: 0 1rem;
+    gap: 1rem;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
 
-.favorites__header__left,
-.favorites__header__center,
-.favorites__header__right {
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  justify-content: center;
-}
+  .favorites__header__left,
+  .favorites__header__center,
+  .favorites__header__right {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+  }
 
-.favorites__header__right--profileButton img {
-  width: 30px;
-  height: 30px;
-  min-width: 30px;
-  min-height: 30px;
-  border-radius: 50%;
-}
+ 
 
-.favorites__header__left {
-  gap: 0;
-  position: relative;
-  right: 2rem;
-}
 
-.favorites__header__left--logo img {
-  width: 200px;
-  height: 100px;
-  position: right;
-  right: 1rem;
-}
+  .favorites__header__right--profileButton img {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 50%;
+  }
+  .favorites__header__left{
+    gap: 0;
+  }
+  .favorites__header__left--logo img{
+    width: 200px;
+    height: 100px;
+    position: relative;
+    right: 6rem;
+  }
 
-.favorites__header__left--menuButton,
-.favorites__header__center--moviesButton a,
-.favorites__header__center--actorsButton a,
-.favorites__header__center--home a,
-.favorites__header__right--searchButton i {
-  color: #fff;
-  text-decoration: none;
-  margin-right: 1rem;
-  font-size: 1.1rem;
-  transition: color 0.2s;
-}
+  .favorites__header__left--menuButton,
+  .favorites__header__center--moviesButton a,
+  .favorites__header__center--actorsButton a,
+  .favorites__header__center--home a,
+  .favorites__header__right--searchButton i {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 2rem;
+    font-size: 1.2rem;
+    transition: color 0.2s;
+  }
 
-/* Mostrar el botón de menú en móvil */
-.favorites__header__left--menuButton {
-  display: block;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
+  .favorites__header__left--menuButton {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
 
   /* Mostrar menú por defecto en escritorio */
   #nav-menu {
@@ -151,34 +150,31 @@
       z-index: 999;
     }
 
-#nav-menu a {
-  margin: 0.5rem 0;
-  color: white;
-}
+    #nav-menu a {
+      margin: 0.5rem 0;
+      color: white;
+    }
 
-#nav-menu.is-hidden {
-  display: none;
-}
+    #nav-menu.is-hidden {
+      display: none;
+    }
 
-#nav-menu:not(.is-hidden) {
-  display: flex;
-}
+    #nav-menu:not(.is-hidden) {
+      display: flex;
+    }
 
-/* TABLET: desde 600px */
-@media (min-width: 600px) {
-  .favorites__header nav {
-    flex-direction: row;
-    justify-content: space-between;
-  }
+    .favorites__header__left--logo img{
+    position: relative;
+    right: 10rem;
+    width: 300px;
+    height: 100px;
 
-  .favorites__header__left--logo img {
-    width: 250px;
-    right: 4rem;
-  }
+    }
 
-  .favorites__header__left {
-    right: 2rem;
-  }
+    .favorites__header__left{
+      position: relative;
+      right: 2.8rem;
+    }
 
     
   }
@@ -214,30 +210,8 @@
    #nav-menu{
     position: relative;
     right: 4rem;
-  }
-
-  .favorites__header__left--logo img {
-    width: 300px;
-    right: 5rem;
-  }
-
-  .favorites__header__left {
-    right: 3rem;
-  }
-
-  .favorites__header__center a {
-    font-size: 1.2rem;
-    margin-right: 2rem;
+    gap: 8rem;
   }
 }
 
 </style>
-
-
-
-
-
-
-
-
-

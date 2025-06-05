@@ -2,31 +2,48 @@
 import MainLayout from '../layout/MainLayout.astro';
 ---
 
-  <script>
-  
-  const form = document.querySelector("#contact-form");
+ <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const $form = document.querySelector("#contact-form");
+    const $inputs = $form.querySelectorAll("input");
+    const $inputNumber = $form.querySelector('input[name="number"]');
+    const $errorMsg = document.getElementById("error-msg");
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault(); 
+    // Validación visual del "número"
+    $inputNumber.addEventListener('input', () => {
+      $inputNumber.style.backgroundColor = $inputNumber.value.length < 10 ? 'red' : 'grey';
+    });
 
-    const $name = document.querySelector('input[name="name"]').value;
-    const $lastName = document.querySelector('input[name="last-name"]').value;
-    const $email = document.querySelector('input[name="email"]').value;
-    const $number = document.querySelector('input[name="number"]').value;
-  
+    // Validación al enviar el formulario
+    $form.addEventListener("submit", (e) => {
+      e.preventDefault();
 
-    const datos = {
-      nombre: $name,
-      apellido: $lastName,
-      email: $email,
-      telefono: $number,
-     
-    };
+      const vacio = Array.from($inputs).some(input => {
+        const esVacio = input.value.trim() === "";
+        input.style.border = esVacio ? "2px solid red" : "rgba(255, 255, 255, 0.4);";
+        return esVacio;
+      });
 
-    console.log("Datos del formulario:", datos);
+      if (vacio) {
+        $errorMsg.style.display = "block";
+      } else {
+        $errorMsg.style.display = "none";
+
+        const datos = Object.fromEntries(
+          Array.from(inputs).map(input => [input.name, input.value])
+        );
+
+        console.log("Datos del formulario:", datos);
+      }
+    });
   });
-  
 </script>
+
+    
+    
+
+</script>
+
 
 
 <MainLayout title="Movie Zone">
@@ -51,7 +68,10 @@ import MainLayout from '../layout/MainLayout.astro';
  
       
       <button class="contect-form__button" type="submit" id="" name="boton">Enviar</button>
+      <p id="error-msg" class="contect-form__p">Por favor, completá todos los campos.</p>
     </form>
+
+    
   </section>
 
    <footer class="footer">
@@ -128,6 +148,10 @@ body{
     margin: auto;
 }
 
+.contect-form__p{
+  color: red;
+  display: none;
+}
 
   .footer {
     background: var(--color-dark);
