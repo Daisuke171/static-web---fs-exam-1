@@ -64,6 +64,9 @@ import MainLayout from '../layout/MainLayout.astro';
 
       <label for="numero" class="contect-form__name"  >Numero de telefono</label>
       <input  class="contect-form__name-in" type="number" id="numero" name="number">
+      
+       <label for="subject " class="contect-form__name">Asunto</label>
+       <input class="contect-form__name-in" type="text" id="subject" name="subject" />
 
  
       
@@ -85,22 +88,26 @@ import MainLayout from '../layout/MainLayout.astro';
 
 <style>
 
-body{
+html, body{
   font-weight: var(--font-weight-bold);
   font-family: var(--font-main);
    background: var(--gradient-primary);
    display: flex;
    flex-direction: column;
    justify-content:center;
+   gap: 1rem;
+   height:100%;
 
 }
 
 .contect-form__title{
   color:var(--color-accent);
-  text
+  font-size:1.2rem;
 }
+
 .contect-form {
   width: 100%;
+  height: 90%;
   display: flex;
   justify-content: center;
 }
@@ -109,26 +116,25 @@ body{
   background: white;
   display: flex;
   flex-direction: column;
-  width: 35%;
-  gap: 0.5rem;
+  width: 80%;
+  gap: 0.2rem;
   padding:2rem;
   border-radius: 2rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
   justify-content: center;
+  height: 90%;
 }
 
 .contect-form__name {
-  font-size: 1rem;
+  font-size: 0.8rem;
   margin:auto;
   width:350px;
 }
 
 .contect-form__name-in {
     margin: auto;
-    width:350px;
-    padding: 0.3em;
-    font-size: 1.2rem;
+    width:400px;
+    padding: 0.5rem;
+    font-size: 0.8rem;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     background: rgb(191, 202, 198) ;
@@ -144,14 +150,15 @@ body{
     color: var(--color-dark);
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 1rem;
+    font-size: 0.8rem;
     margin: auto;
 }
 
 .contect-form__p{
   color: red;
   display: none;
-}
+  font-zise: 0.5rem;
+  }
 
   .footer {
     background: var(--color-dark);
@@ -167,9 +174,11 @@ body{
 
   .footer-nav {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.2rem;
     align-items: center;
     font-family: var(--font-main);
+    font-size:0.8rem;
+    height: 0.2rem;
   }
 
   .footer-nav__link {
@@ -183,50 +192,82 @@ body{
     color: var(--color-light);
   }
 
-  @media (max-width:768px ){
-    .contect-form__contact { 
-  width: 350px;
+
+
+@media screen and (min-width: 680px){
+
+  .contect-form__title{
+  color:var(--color-accent);
+  font-size:1.5rem;
+}
+
+.contect-form__contact { 
+  width: 50%;
+  gap: 0.3rem;
+  padding:3rem;
+  height: 90%;
+}
+
+.contect-form__name {
+  font-size: 0.9rem;
 }
 
 .contect-form__name-in {
-
+    margin: auto;
+    width:400px;
+    padding: 0.5rem;
     font-size: 1rem;
-   
 }
 
+}
+
+
+
+@media screen and (min-width: 1240px){
+
+.contect-form__title{
+  color:var(--color-accent);
+  font-size:2rem;
+  
+}
+
+.contect-form__name {
+  font-size: 1rem;
+}
+
+  .contect-form__contact { 
+  width: 30%;
+  gap: 0.3rem;
+  padding:3rem;
+  height: 90%;
+}
+
+
+.contect-form__name-in {
+    margin: auto;
+    width:400px;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.contect-form__p{
+  font-zise: 1rem;
+}
+
+
+ .footer-nav {
+    font-size: 1rem;
+    height: 1.2rem;
   }
 
-  @media (max-width:420px){
-    .contect-form__contact { 
-  width: 300px;
- }
-  
-.contect-form__name-in {
-    margin: auto;
-    width:300px;
-    font-size: 1rem;
+  .contect-form__button{
  
-}
-   
-
-  .contect-form__name {
-  font-size: 1rem;
-  margin:auto;
-  width:300px;
+    padding: 0.8em 2em;
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+  
 }
 
-.contect-form__button{
- width: fit-content;
-    padding: 0.7em 1em;
-    border-radius: 20px;
-    border: none;
-    background-color: var(--color-accent);
-    color: var(--color-dark);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-    margin: auto;
-}
 }
   
 
