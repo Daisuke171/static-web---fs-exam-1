@@ -8,7 +8,7 @@ import MainLayout from '../layout/MainLayout.astro';
 
 
 
-<MainLayout title="Movie Zone">
+<MainLayout title="Movie Zone" client:load>
 
   <section class="contect-form">
     <form class="contect-form__contact" id="contact-form" action="">
@@ -45,7 +45,7 @@ import MainLayout from '../layout/MainLayout.astro';
     </nav>
   </footer>
 
-<script type="module" src="/scripts/formValidation.js"></script>
+<script type="module" src="/scripts/formValidation.js" ></script>
 
 
 </MainLayout>
