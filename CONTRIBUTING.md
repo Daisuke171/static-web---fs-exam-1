@@ -1,4 +1,4 @@
-#Nuestra metodologia de trabajo fue la siguiente.
+# Nuestra metodologia de trabajo fue la siguiente.
 
 En los primeros días nos encargamos de delegar las tareas.
 
