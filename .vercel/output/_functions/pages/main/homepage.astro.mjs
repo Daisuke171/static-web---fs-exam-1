@@ -1,6 +1,6 @@
-import { c as createComponent, b as renderComponent, r as renderTemplate, m as maybeRenderHead, d as addAttribute } from '../../chunks/astro/server_Bg_fNKsD.mjs';
-import { $ as $$MainLayout } from '../../chunks/MainLayout_DYFgb4z7.mjs';
-import { $ as $$NavBar } from '../../chunks/navBar_DHAG_Ld2.mjs';
+import { c as createComponent, r as renderComponent, b as renderTemplate, m as maybeRenderHead, e as addAttribute } from '../../chunks/astro/server_D2uXXV46.mjs';
+import { $ as $$MainLayout } from '../../chunks/MainLayout_F3IuKN8Z.mjs';
+import { $ as $$NavBar } from '../../chunks/navBar_XeHe7adw.mjs';
 /* empty css                                       */
 export { renderers } from '../../renderers.mjs';
 

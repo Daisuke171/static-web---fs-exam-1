@@ -42,8 +42,7 @@ const movies = data.results.slice(0, 5);
 </MainLayout>
 
 <style>
-
-:root {
+  :root {
   --color-background: var(--color-dark);
 }
 
@@ -60,6 +59,8 @@ html, body {
 main.main-content {
   flex: 1;
 }
+
+/* ---------- HEADER ---------- */
 
 .header-catalog {
   padding-bottom: 3rem;
@@ -83,12 +84,13 @@ main.main-content {
 }
 
 .header-catalog__description {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-align: center;
   color: var(--color-light);
   max-width: 600px;
 }
 
+/* ---------- HERO SECTION ---------- */
 
 .hero-section {
   display: flex;
@@ -98,23 +100,14 @@ main.main-content {
 }
 
 .hero-card {
-  display: grid;
-  padding: 1rem;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
   background-color: rgba(255, 255, 255, 0.05);
   color: var(--color-light);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   transition: transform 0.3s ease;
-}
-
-.hero-card p {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .hero-card:hover {
@@ -135,7 +128,7 @@ main.main-content {
 }
 
 .hero-card__title {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: var(--color-accent);
 }
 
@@ -143,6 +136,10 @@ main.main-content {
   font-size: 1rem;
   line-height: 1.5;
   color: var(--color-light);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .hero-card__rating {
@@ -150,14 +147,15 @@ main.main-content {
   color: gold;
 }
 
+/* ---------- MEDIA QUERIES ---------- */
 
-@media (min-width: 768px) {
+/* TABLET */
+@media (min-width: 600px) {
   .header-catalog__title {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
   }
 
   .hero-card {
-    display: flex;
     flex-direction: row;
   }
 
@@ -166,45 +164,58 @@ main.main-content {
     height: auto;
   }
 
-  .hero-card__content {
-    flex: 1;
+  .hero-card__title {
+    font-size: 1.8rem;
   }
 }
 
+/* ESCRITORIO / NETBOOK */
+@media (min-width: 1024px) {
+  .header-catalog__title {
+    font-size: 3rem;
+  }
+
+  .hero-card__title {
+    font-size: 2rem;
+  }
+
+  .hero-card__img {
+    width: 300px;
+  }
+}
+
+/* ---------- FOOTER ---------- */
 
 .footer {
   background: var(--color-dark);
   color: var(--color-light);
   padding: 2rem 1rem;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   border-top: 2px solid var(--color-primary);
+  gap: 1rem;
 }
 
 .footer-nav {
   display: flex;
   gap: 1.5rem;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.footer-nav__link {
+.footer-nav__link,
+.footer-nav__contac {
   color: var(--color-accent);
   text-decoration: none;
   font-weight: var(--font-weight-medium);
   transition: color 0.3s ease;
-}
-
-.footer-nav__contac{
-  color: var(--color-accent);
-  text-decoration: none;
-  font-weight: var(--font-weight-medium);
-  transition: color 0.3s ease;
-  text-align: end;
 }
 
 .footer-nav__link:hover,
 .footer-nav__contac:hover {
   color: var(--color-light);
 }
+
 </style>
