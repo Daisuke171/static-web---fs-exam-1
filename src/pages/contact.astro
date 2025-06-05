@@ -2,7 +2,7 @@
 import MainLayout from '../layout/MainLayout.astro';
 ---
 
- <script>
+  <script type="module" is:inline>
   document.addEventListener('DOMContentLoaded', () => {
     const $form = document.querySelector("#contact-form");
     const $inputs = $form.querySelectorAll("input");
