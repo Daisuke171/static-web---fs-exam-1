@@ -22,7 +22,7 @@ const { name } = Astro.props;
 </MainLayout>
 
 <style>
-    .header-catalog {
+.header-catalog {
   padding-bottom: 3rem;
   display: flex;
   flex-direction: column;
@@ -46,7 +46,6 @@ const { name } = Astro.props;
 
 .header-catalog__search {
   width: 100%;
-  max-width: 350px;
   padding: 0.8em;
   font-size: 1.2rem;
   border-radius: 20px;
@@ -66,13 +65,85 @@ const { name } = Astro.props;
   border-radius: 20px;
   border: none;
   background-color: var(--color-accent);
-  color: var(--color-dark);
+  color: var(--color-light);
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 1.1rem;
 }
 
 .header-catalog__button:hover {
-  background-color: var(--color-light);
+  background-color: var(--color-dark);
+}
+
+/* Media Queries */
+@media screen and (max-width: 380px) {
+  .header-catalog{
+    padding-bottom: 2.25rem;
+  }
+
+  .header-catalog__title{
+    font-size: 2rem;
+    padding-top: 0.25rem;
+  }
+
+  .header-catalog__search{
+    width: 280px;
+    height: 45px;
+    padding-top: 0.25rem;
+  }
+
+  .header-catalog__button{
+    height: 40px;
+    text-align: center;
+    padding: 0 2rem;
+    
+  }
+}
+
+@media screen and (min-width: 380px){
+  .header-catalog{
+    padding-bottom: 2.25rem;
+  }
+
+  .header-catalog__title{
+    font-size: 2.95rem;
+    padding-top: 0.25rem;
+  }
+
+  .header-catalog__search{
+    width: 400px;
+    height: 50px;
+    padding-top: 0.95rem;
+    
+  }
+
+.header-catalog__button{
+    width: 200px;
+    height: 42px;
+    text-align: center;
+    padding: 0 2rem;
+  }  
+}
+
+@media screen and (min-width: 700px){
+  .header-catalog__title{
+    font-size: 4rem;
+    padding-top: 0.25rem;
+  }
+
+  .header-catalog__search{
+    width: 600px;
+    height: 60px;
+    padding-top: 0.95rem;
+    border-radius: 30px;
+  }
+}
+
+@media screen and (min-width: 900px){
+
+}
+
+@media screen and (min-width: 1200px){
+
 }
 </style>

@@ -4,7 +4,8 @@ export const prerender = true; ///for server deploy
 import MainLayout from "../../layout/MainLayout.astro";
 import type { GetStaticPaths } from "astro";
 import { slugify } from "../../utils/slugify";
-
+import { updateTime } from "../../utils/updateTime"
+import NavBar from "../../components/navBar.astro"
 export const getStaticPaths: GetStaticPaths = async () => {
   const API_KEY = "1e7a7835f074482139d752775addeb5e";
   const pageCount = 18;
@@ -30,11 +31,13 @@ const API_KEY = "1e7a7835f074482139d752775addeb5e";
 const response = await fetch(
   `https://api.themoviedb.org/3/person/${id}?api_key=${API_KEY}&language=es-ES`,
 );
+
 const actor = await response.json();
 ---
 
 <MainLayout title={actor.title}>
   <main class="actor">
+    <NavBar />
     <section class="actor__content">
       <aside class="actor__poster-wrapper">
         <img
@@ -42,12 +45,51 @@ const actor = await response.json();
           alt={`Póster de ${actor.name}`}
           class="actor__poster"
         />
-        <div class="actor__popularity">
-          <div class="actor__popularity-value"
-            >{actor.popularity.toFixed(1)}</div
-          >
-          <span class="actor__popularity-max">/100</span>
-        </div>
+        <span class="actor__content--title-info">Personal Info</span>
+
+        <span class="actor__content--known-for-deparment info">
+          Rol: 
+          {actor.known_for_department}
+        </span>
+        <span class="actor__content--gender info">
+          Genero: 
+          {() => {
+          if(actor.gender===0) return "Not set";
+          else if(actor.gender===1) return "Mujer";
+          else if(actor.gender===2) return "Hombre";
+          else if(actor.gender===3) return "No binario";
+          }}
+        </span>
+        <span class="actor__content--age info">
+          Edad: 
+          {() => {
+            const birthday = new Date(actor.birthday);
+            const presentYear = new Date(updateTime());
+
+            let age = presentYear.getFullYear() - birthday.getFullYear();
+
+            if(presentYear.getMonth()>=birthday.getMonth() && presentYear.getDate()>=birthday.getDate()){
+              age+=1;
+            }
+            else{
+              age-=1;
+            }
+
+            return age;
+          }}
+        </span>
+        <span class="actor__content--aka info aka-title">Tambien conocido/a como: </span>
+        <span class="actor__content--aka info">
+          <ul>
+            <li>{actor.also_known_as[0]}</li>
+            <li>{actor.also_known_as[1]}</li>
+          </ul>
+          
+        </span>
+
+        <span class="actor__popularity">
+          <span class="actor__popularity-value">❤️{actor.popularity.toFixed(1)}</span>
+        </span>
       </aside>
 
       <article class="actor__info">
@@ -87,8 +129,8 @@ const actor = await response.json();
             )
           }
         </header>
+        <h2 class="actor__biography-title">Biography</h2>
         <section class="actor__biography">
-          <h2 class="actor__biography-title">Biography</h2>
           <div class="actor__biography-text">
             {
               actor.biography ? (
@@ -109,15 +151,30 @@ const actor = await response.json();
   </footer>
 </MainLayout>
 
+
 <style>
-  .actor {
+  html {
     min-height: 100vh;
     color: var(--color-text);
     font-family: var(--font-main);
     display: flex;
     flex-direction: column;
-    background: oklch(0.93 0.03 100);
+   	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+
   }
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
 
   /* Contenido principal */
   .actor__content {
@@ -127,35 +184,55 @@ const actor = await response.json();
     padding: 2rem;
     flex-grow: 1;
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-rows: 1fr 0.5fr;
     gap: 3rem;
     align-items: center;
   }
 
   /* Póster del actor */
   .actor__poster-wrapper {
-    width: 100%;
-    max-width: 400px;
-    position: relative;
     border-radius: 15px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: var(--gradient-glass);
+    backdrop-filter: blur(10px);
   }
   .actor__poster-wrapper:hover {
     transform: translateY(-10px) scale(1.02);
   }
 
+  .actor__content--title-info{
+    width: fit-content;
+    font-size: 1.4rem;
+    color: var(--color-light);
+    margin: 0.8rem 1.4rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .info{
+    width: max-content;
+    font-size: 1rem;
+    color: var(--color-light);
+    margin: 0 2.5rem;
+    line-height: 2;
+  }
+  ul{
+    margin-bottom: 1rem;
+  }
+.aka-title{
+  font-size: 1.1rem;
+  margin: 0 1.4rem;
+}
+  
+
   .actor__poster {
-    width: 100%;
     display: block;
-    aspect-ratio: 2/3;
     object-fit: cover;
   }
 
   .actor__popularity {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: relative;
     padding: 1.5rem;
     display: flex;
     align-items: center;
@@ -169,35 +246,27 @@ const actor = await response.json();
     color: var(--color-accent);
     text-shadow: var(--gradient-dark);
   }
-  .actor__popularity-max {
-    font-size: 1.6rem;
-    color: var(--color-light);
-    opacity: 0.6;
-    align-self: flex-end;
-    text-shadow: var(--gradient-dark);
-    font-weight: var(--font-weight-medium);
-  }
 
   /* Información del actor */
   .actor__info {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 1rem;
   padding-bottom: 5rem;
+  width: fit-content;
 }
 
   .actor__header {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    
   }
 
   .actor__name {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: var(--font-weight-bold);
     color: var(--color-text);
-    margin: 0;
-    line-height: 1.2;
+    line-height: 1.1;
     text-shadow: var(--gradient-dark);
   }
 
@@ -207,11 +276,14 @@ const actor = await response.json();
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--color-text);
     text-shadow: var(--gradient-dark);
     font-weight: var(--font-weight-medium);
   }
+.actor__biography-title{
+  margin-bottom: 0.25rem;
+}
 
 .actor__biography {
   width: 100%;
@@ -223,13 +295,15 @@ const actor = await response.json();
   text-shadow: var(--gradient-dark);
 }
 
+
+
   .actor__biography-text {
   width: 100%;
   font-size: 1.2rem;
   line-height: 1.7;
-  color: var(--color-text);
+  color: var(--color-light);
   margin: 0;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.6);
   padding: 1.5rem;
   border-radius: 20px;
   backdrop-filter: blur(10px);
@@ -271,4 +345,79 @@ const actor = await response.json();
   .footer-nav__link:hover {
     color: var(--color-light);
   }
+
+  /* Media Queries */
+@media screen and (min-width: 380px){
+  .actor__content {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr;
+    gap: 2rem;
+  }
+  .actor__poster-wrapper{
+    max-width: 19rem;
+  }
+  .actor__info{
+    width: 19rem;
+  }
+  
+}
+
+@media screen and (min-width: 700px){
+
+}
+
+@media screen and (min-width: 900px){
+.actor__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .actor__info{
+    width: 35rem;
+  }
+}
+
+@media screen and (min-width: 1000px){
+.actor__content{
+    max-width: 2000px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .actor__info{
+    width: 40rem;
+  }
+}
+@media screen and (min-width: 1300px){
+  .actor__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .actor__poster-wrapper{
+    max-width: 25rem;
+  }
+  .actor__info{
+    width: 60rem;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 899px) {
+  .actor__content {
+    grid-template-columns: 1fr;
+    padding: 3rem 2rem;
+  }
+
+  .actor__poster-wrapper {
+    max-width: 22rem;
+    margin: 0 auto;
+  }
+
+  .actor__info {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .actor__biography {
+    max-height: 400px;
+  }
+}
 </style>
+

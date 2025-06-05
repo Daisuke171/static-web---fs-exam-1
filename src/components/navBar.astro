@@ -130,6 +130,8 @@
     gap: 1rem;
   }
 
+   
+
   /* Responsive: ocultar en móviles */
   @media (max-width: 768px) {
     .favorites__header__left--menuButton {
@@ -177,6 +179,12 @@
     
   }
 
+ @media screen and (max-width: 380px) {
+    .favorites__header__left--logo img{
+      right: 8rem;
+    }
+  }
+
   @media (min-width: 780px) {
     .favorites__header__center {
       display: flex !important;
@@ -191,14 +199,14 @@
     }
   }
 
-@media (min-width: 769px){
+@media screen and (min-width: 769px){
    #nav-menu{
     position: relative;
     right: 3rem;
     gap: 4rem;
   }
 }
-@media (min-width: 1080px){
+@media screen and (min-width: 1080px){
    #nav-menu{
     position: relative;
     right: 4rem;
