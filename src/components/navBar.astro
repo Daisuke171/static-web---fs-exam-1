@@ -125,18 +125,31 @@
   cursor: pointer;
 }
 
-/* Menú oculto por defecto */
-#nav-menu {
-  display: none;
-  flex-direction: column;
-  position: absolute;
-  top: 70px;
-  left: 0;
-  width: 100%;
-  background: #222;
-  padding: 1rem;
-  z-index: 999;
-}
+  /* Mostrar menú por defecto en escritorio */
+  #nav-menu {
+    display: flex;
+    gap: 1rem;
+  }
+
+   
+
+  /* Responsive: ocultar en móviles */
+  @media (max-width: 768px) {
+    .favorites__header__left--menuButton {
+      display: block;
+    }
+
+    #nav-menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      background: #222;
+      padding: 1rem;
+      z-index: 999;
+    }
 
 #nav-menu a {
   margin: 0.5rem 0;
@@ -167,32 +180,39 @@
     right: 2rem;
   }
 
-  #nav-menu {
-    display: flex !important;
-    flex-direction: row;
+    
+  }
+
+ @media screen and (max-width: 380px) {
+    .favorites__header__left--logo img{
+      right: 8rem;
+    }
+  }
+
+  @media (min-width: 780px) {
+    .favorites__header__center {
+      display: flex !important;
+      position: static;
+      background: none;
+      flex-direction: row;
+      padding: 0;
+    }
+
+    .favorites__header__left--menuButton {
+      display: none;
+    }
+  }
+
+@media screen and (min-width: 769px){
+   #nav-menu{
     position: relative;
-    gap: 2rem;
-    background: none;
-    padding: 0;
-    top: auto;
-    left: auto;
-    width: auto;
-  }
-
-  .favorites__header__left--menuButton {
-    display: none;
-  }
-
-  .favorites__header__center {
-    flex-direction: row;
-    padding: 0;
+    right: 3rem;
+    gap: 4rem;
   }
 }
-
-/* NETBOOK/ESCRITORIO: desde 1024px */
-@media (min-width: 1024px) {
-  #nav-menu {
-    gap: 4rem;
+@media screen and (min-width: 1080px){
+   #nav-menu{
+    position: relative;
     right: 4rem;
   }
 
