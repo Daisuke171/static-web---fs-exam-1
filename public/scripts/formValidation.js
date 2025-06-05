@@ -1,4 +1,4 @@
-function formValidation(){
+(function formValidation(){
     document.addEventListener('DOMContentLoaded', () => {
     const $form = document.querySelector("#contact-form");
     const $inputs = $form.querySelectorAll("input");
@@ -33,5 +33,4 @@ function formValidation(){
       }
     });
   });
-}
-formValidation();
+})();
