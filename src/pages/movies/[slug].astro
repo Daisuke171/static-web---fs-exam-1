@@ -157,7 +157,7 @@ const movie = await response.json();
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
-    align-items: flex-end;
+    align-items: flex-start;
   }
 
   /* Póster de la película */
@@ -165,13 +165,16 @@ const movie = await response.json();
     position: relative;
     border-radius: 15px;
     overflow: hidden;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
   }
   .movie__poster-wrapper:hover {
     transform: translateY(-10px) scale(1.02);
   }
 
   .movie__poster {
-    width: 80%;
+    width: 100%;
     display: block;
     aspect-ratio: 2/3;
     object-fit: cover;
@@ -314,5 +317,106 @@ const movie = await response.json();
 .footer-nav__link:hover {
   color: var(--color-light);
 }
+ @media screen and (max-width: 1300px) {
+  .movie__content {
+    gap: 3rem;
+  }
+  
+  .movie__poster-wrapper {
+    max-width: 350px;
+  }
+}
 
+@media screen and (max-width: 1000px) {
+  .movie__content {
+    padding: 4rem 3rem;
+    max-width: 900px;
+  }
+  
+  .movie__poster-wrapper {
+    max-width: 320px;
+  }
+  
+  .movie__title {
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .movie__content {
+    grid-template-columns: 1fr 2fr;
+    padding: 3rem 2rem;
+  }
+  
+  .movie__poster-wrapper {
+    max-width: 280px;
+  }
+  
+  .movie__title {
+    font-size: 2.2rem;
+  }
+  
+  .movie__overview-title {
+    font-size: 1.8rem;
+  }
+  
+  .footer-nav__link {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .movie__content {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.5rem;
+    gap: 2rem;
+  }
+  
+  .movie__poster-wrapper {
+    max-width: 250px;
+    margin: 0 auto;
+  }
+  
+  .movie__info {
+    width: 100%;
+    padding-bottom: 2rem;
+  }
+  
+  .movie__title {
+    font-size: 2rem;
+    text-align: center;
+  }
+  
+  .movie__meta {
+    justify-content: center;
+  }
+  
+  .movie__overview-text {
+    font-size: 1.1rem;
+    padding: 1rem;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .movie__content {
+    padding: 1.5rem 1rem;
+  }
+  
+  .movie__poster-wrapper {
+    max-width: 220px;
+  }
+  
+  .movie__title {
+    font-size: 1.8rem;
+  }
+  
+  .movie__genre {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .footer-nav__link {
+    font-size: 1rem;
+  }
+}
 </style>
